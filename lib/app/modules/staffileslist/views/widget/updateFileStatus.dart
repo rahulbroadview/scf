@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,6 +76,8 @@ class _UpdateFileStatusViewState extends State<UpdateFileStatusView> {
       "remarks": remarksController.text.trim(),
       "file_no": widget.fileNumber,
     };
+    print(jsonEncode(data));
+    print(UrlUtils.updateFileStatus);
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.updateFileStatus, data);
     if (finalData != null) {

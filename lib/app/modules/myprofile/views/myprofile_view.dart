@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 import 'package:pay_day_manager/app/modules/myprofile/views/edit_profile.dart';
@@ -85,18 +87,57 @@ class MyprofileView extends GetView<MyprofileController> {
                                           children: [
                                             Center(
                                               child: CircleAvatar(
-                                                radius: 25.r,
+                                                radius: 40.r,
                                                 backgroundColor: Colors.white,
-                                                child: Image.asset(
-                                                  'assets/assets_svg/profile.png',
-                                                  height: 50.h,
-                                                  width: 50.h,
+                                                // backgroundImage:
+                                                //     const AssetImage(
+                                                //   'assets/assets_svg/profile.png',
+                                                // ),
+
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      "https://www.scfinvestmentgroup.com/public/upload/user_image/${controller.profileDetails[index].profileImage}",
+
+                                                  imageBuilder: (context,
+                                                          imageProvider) =>
+                                                      Container(
+                                                    width: 80.h,
+                                                    height: 80.h,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      image: DecorationImage(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.cover),
+                                                    ),
+                                                  ),
+
+                                                  fit: BoxFit.fitHeight,
+                                                  // placeholder: (context,
+                                                  //         url) =>
+                                                  //     const CircularProgressIndicator(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Container(
+                                                    height: 50.h,
+                                                    width: 50.h,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.r),
+                                                        color: ConstColor
+                                                            .profileBackgroundColor),
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                          "assets/assets_svg/person.svg"),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 10.h,
                                             ),
+
                                             Center(
                                               child: CommonText(
                                                 text:
@@ -144,8 +185,10 @@ class MyprofileView extends GetView<MyprofileController> {
                                                         fontSize: 12.sp,
                                                         text: 'Edit Profile',
                                                         onPressed: () {
-                                                          Get.to(
-                                                              const EditProfile());
+                                                          Get.to(const EditProfile())!
+                                                              .then((value) =>
+                                                                  controller
+                                                                      .getProfile());
                                                         })),
                                               ],
                                             )

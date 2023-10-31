@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pay_day_manager/app/modules/staffileslist/views/widget/documents.dart';
 import 'package:pay_day_manager/app/modules/staffileslist/views/widget/followuplist.dart';
@@ -33,17 +34,21 @@ class _FileDetailsViewState extends State<FileDetailsView> {
                   Icons.arrow_back_ios,
                   color: Colors.black,
                 )),
-            title: const Text(
-              'File Details',
-              style: TextStyle(
-                color: Colors.black,
+            title: Padding(
+              padding: EdgeInsets.only(right: 20.w),
+              child: Text(
+                'File Details',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500),
               ),
             ),
             bottom: const TabBar(
               tabs: [
                 Tab(
                   icon: Icon(
-                    Icons.timeline,
+                    Icons.alarm,
                     color: Colors.black,
                   ),
                   child: Text(
@@ -59,7 +64,7 @@ class _FileDetailsViewState extends State<FileDetailsView> {
                     color: Colors.black,
                   ),
                   child: Text(
-                    "FollowupList",
+                    "Follow Up",
                     style: TextStyle(
                       color: Colors.black,
                     ),

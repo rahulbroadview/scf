@@ -129,9 +129,10 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
+                                                          const SizedBox(),
                                                           CommonText(
                                                               text:
-                                                                  'Sort By Date'),
+                                                                  'Search By Filter'),
                                                           IconButton(
                                                               onPressed: () {
                                                                 Get.back();
@@ -227,6 +228,45 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                             SizedBox(
                                                               height: 15.h,
                                                             ),
+                                                            Center(
+                                                              child: Row(
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Divider(
+                                                                      height: 4,
+                                                                      thickness:
+                                                                          2,
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.7),
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 15.w,
+                                                                  ),
+                                                                  CommonText(
+                                                                      text:
+                                                                          'OR'),
+                                                                  SizedBox(
+                                                                    width: 15.w,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Divider(
+                                                                      height: 4,
+                                                                      thickness:
+                                                                          2,
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.7),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                             CommonText(
                                                                 text:
                                                                     'File Status'),
@@ -293,7 +333,7 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                     Colors
                                                                         .black,
                                                                 buttonHeight:
-                                                                    50,
+                                                                    55,
                                                                 buttonWidth:
                                                                     Get.width,
                                                                 buttonPadding:
@@ -350,7 +390,8 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                             ),
                                                             Center(
                                                               child: SizedBox(
-                                                                width: 200,
+                                                                width:
+                                                                    Get.width,
                                                                 height: 50.h,
                                                                 child:
                                                                     CommonElevatedButton(
@@ -366,7 +407,7 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600,
-                                                                  text: 'Save',
+                                                                  text: 'Apply',
                                                                   onPressed:
                                                                       () {
                                                                     if (controller
@@ -517,12 +558,10 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                                 fontColor: Colors.white,
                                                                               )
                                                                             : const SizedBox(),
-
                                                                         SizedBox(
                                                                           height:
                                                                               5.w,
                                                                         ),
-
                                                                         CommonText(
                                                                           text:
                                                                               "${controller.fileFilterList![index].fileNo}",
@@ -535,7 +574,6 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                           fontColor:
                                                                               Colors.white,
                                                                         ),
-
                                                                         SizedBox(
                                                                           height:
                                                                               5.w,
@@ -599,44 +637,13 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                             ),
                                                                           ],
                                                                         ),
-
                                                                         SizedBox(
                                                                           height:
                                                                               10.h,
                                                                         ),
-
-                                                                        // Row(
-                                                                        //   children: [
-                                                                        //     // Icon(
-                                                                        //     //   Icons.timer_rounded,
-                                                                        //     //   size: 14.h,
-                                                                        //     //   color: ConstColor
-                                                                        //     //       .greyTextColor,
-                                                                        //     // ),
-                                                                        //     // SizedBox(
-                                                                        //     //   width: 5.w,
-                                                                        //     // ),
-                                                                        //     // CommonText(
-                                                                        //     //     text: 'Just now',
-                                                                        //     //     fontSize: 12.h,
-                                                                        //     //     fontColor: ConstColor
-                                                                        //     //         .greyTextColor),
-                                                                        //   ],
-                                                                        // )
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                  // CommonText(
-                                                                  // text: controller
-                                                                  //         .fileList[
-                                                                  //             index]
-                                                                  //         .loanAmount ??
-                                                                  //     '',
-                                                                  // fontSize:
-                                                                  //     12.h,
-                                                                  // fontColor:
-                                                                  //     ConstColor
-                                                                  //         .greyTextColor),
                                                                 ],
                                                               ),
                                                             ),
@@ -666,13 +673,23 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                       );
                                                     },
                                                     child: Container(
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10.r),
-                                                            color: const Color(
-                                                                0XFF225072)),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.r),
+                                                          color: controller
+                                                                      .fileList[
+                                                                          index]
+                                                                      .viewStaff !=
+                                                                  null
+                                                              ? const Color(
+                                                                  0XFF225072)
+                                                              : Colors.grey
+                                                                  .withOpacity(
+                                                                      0.4),
+                                                        ),
                                                         child: Column(
                                                           children: [
                                                             Padding(
@@ -709,7 +726,7 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               maxLine: 2,
                                                                               overflow: TextOverflow.ellipsis,
                                                                               fontSize: 14.sp,
-                                                                              fontColor: Colors.white,
+                                                                              fontColor: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
                                                                             ),
                                                                           ],
                                                                         ),
@@ -720,7 +737,7 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                                 maxLine: 2,
                                                                                 overflow: TextOverflow.ellipsis,
                                                                                 fontSize: 14.sp,
-                                                                                fontColor: Colors.white,
+                                                                                fontColor: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
                                                                               )
                                                                             : const SizedBox(),
 
@@ -738,8 +755,9 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               TextOverflow.ellipsis,
                                                                           fontSize:
                                                                               14.sp,
-                                                                          fontColor:
-                                                                              Colors.white,
+                                                                          fontColor: controller.fileList[index].viewStaff != null
+                                                                              ? Colors.white
+                                                                              : Colors.black,
                                                                         ),
 
                                                                         SizedBox(
@@ -757,14 +775,14 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                                     maxLine: 2,
                                                                                     overflow: TextOverflow.ellipsis,
                                                                                     fontSize: 12.sp,
-                                                                                    fontColor: Colors.white,
+                                                                                    fontColor: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
                                                                                   ),
                                                                                   CommonText(
                                                                                     text: "${controller.fileList[index].loanAmount}",
                                                                                     maxLine: 2,
                                                                                     overflow: TextOverflow.ellipsis,
                                                                                     fontSize: 14.sp,
-                                                                                    fontColor: Colors.white,
+                                                                                    fontColor: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
                                                                                   ),
                                                                                 ],
                                                                               ),
@@ -773,7 +791,7 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               height: 30,
                                                                               width: 2,
                                                                               decoration: BoxDecoration(
-                                                                                color: Colors.white,
+                                                                                color: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
                                                                                 borderRadius: BorderRadius.circular(1.r),
                                                                               ),
                                                                             ),
@@ -784,13 +802,15 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               child: Column(
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
-                                                                                  CommonText(
-                                                                                    text: "Assign To",
-                                                                                    maxLine: 2,
-                                                                                    overflow: TextOverflow.ellipsis,
-                                                                                    fontSize: 12.sp,
-                                                                                    fontColor: Colors.white,
-                                                                                  ),
+                                                                                  controller.fileList[index].viewStaff != null
+                                                                                      ? CommonText(
+                                                                                          text: "Assign To",
+                                                                                          maxLine: 2,
+                                                                                          overflow: TextOverflow.ellipsis,
+                                                                                          fontSize: 12.sp,
+                                                                                          fontColor: Colors.white,
+                                                                                        )
+                                                                                      : const SizedBox(),
                                                                                   controller.fileList[index].viewStaff != null
                                                                                       ? CommonText(
                                                                                           text: "${controller.fileList[index].viewStaff!.firstName} ${controller.fileList[index].viewStaff!.lastName}",

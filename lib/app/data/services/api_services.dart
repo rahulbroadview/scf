@@ -385,6 +385,8 @@ class APIServices {
             validateStatus: (_) => true,
             headers: {'Content-Type': 'application/json'}),
       );
+      print(url);
+      print("======response=====$response");
       EasyLoading.dismiss();
       if (response.data['statuscode'] == 404) {
         Get.rawSnackbar(

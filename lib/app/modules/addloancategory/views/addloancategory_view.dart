@@ -69,19 +69,19 @@ class AddLoanCategoryView extends GetView<AddLoanCategoryController> {
                           SizedBox(
                             height: 20.h,
                           ),
-                          CommonTextFormField(
-                            fillColor: Colors.white,
-                            borderColor: Colors.white,
-                            hintText: "Loan Name",
-                            controller: controller.loanName,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter Category name";
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
+                          // CommonTextFormField(
+                          //   fillColor: Colors.white,
+                          //   borderColor: Colors.white,
+                          //   hintText: "Loan Name",
+                          //   controller: controller.loanName,
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return "Please enter Category name";
+                          //     } else {
+                          //       return null;
+                          //     }
+                          //   },
+                          // ),
                           // SizedBox(
                           //   height: 15.h,
                           // ),

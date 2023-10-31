@@ -191,20 +191,37 @@ class CreateFileView extends GetView<CreateFileController> {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              Center(
-                                child: SizedBox(
-                                    height: 50.h,
-                                    width: 335.h,
-                                    child: CommonElevatedButton(
-                                        text: 'Add File',
-                                        onPressed: () {
-                                          if (controller.staffKey.currentState!
-                                              .validate()) {
-                                            controller.addFileListApi();
-                                            // controller.staffListApi();
-                                          }
-                                        })),
-                              ),
+                              controller.fileDetails != null
+                                  ? Center(
+                                      child: SizedBox(
+                                          height: 50.h,
+                                          width: 335.h,
+                                          child: CommonElevatedButton(
+                                              text: 'Update File',
+                                              onPressed: () {
+                                                if (controller
+                                                    .staffKey.currentState!
+                                                    .validate()) {
+                                                  controller.updateFile();
+                                                  // controller.staffListApi();
+                                                }
+                                              })),
+                                    )
+                                  : Center(
+                                      child: SizedBox(
+                                          height: 50.h,
+                                          width: 335.h,
+                                          child: CommonElevatedButton(
+                                              text: 'Add File',
+                                              onPressed: () {
+                                                if (controller
+                                                    .staffKey.currentState!
+                                                    .validate()) {
+                                                  controller.addFileListApi();
+                                                  // controller.staffListApi();
+                                                }
+                                              })),
+                                    ),
                               SizedBox(
                                 height: 30.h,
                               ),

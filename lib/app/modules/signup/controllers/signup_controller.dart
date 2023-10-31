@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pay_day_manager/app/config/url_utils.dart';
@@ -29,6 +31,8 @@ class SignupController extends GetxController {
       "user_email": emailController.text.trim(),
       "password": passwordController.text.trim(),
     };
+    print(jsonEncode(data));
+    print(UrlUtils.loginApiUrl);
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.loginApiUrl, data);
     if (finalData != null) {

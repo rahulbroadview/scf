@@ -24,6 +24,17 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
     return GetBuilder<CustomerlistingController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.to(const AddcustomerView())!
+                  .then((value) => controller.customerListApi());
+            },
+            backgroundColor: ConstColor.buttonColor,
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
           body: Column(
             children: [
               Container(
@@ -51,20 +62,20 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                               )
                             ],
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(const AddcustomerView())!.then(
-                                  (value) => controller.customerListApi());
-                            },
-                            child: CircleAvatar(
-                              radius: 12.r,
-                              backgroundColor: ConstColor.buttonColor,
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Get.to(const AddcustomerView())!.then(
+                          //         (value) => controller.customerListApi());
+                          //   },
+                          //   child: CircleAvatar(
+                          //     radius: 12.r,
+                          //     backgroundColor: ConstColor.buttonColor,
+                          //     child: const Icon(
+                          //       Icons.add,
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -126,8 +137,10 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
+                                                      const SizedBox(),
                                                       CommonText(
-                                                          text: 'Sort By Date'),
+                                                          text:
+                                                              'Search By Filter'),
                                                       IconButton(
                                                           onPressed: () {
                                                             Get.back();
@@ -220,7 +233,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                         ),
                                                         Center(
                                                           child: SizedBox(
-                                                            width: 200,
+                                                            width: Get.width,
                                                             height: 50.h,
                                                             child:
                                                                 CommonElevatedButton(
@@ -233,7 +246,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
-                                                              text: 'Save',
+                                                              text: 'Apply',
                                                               onPressed: () {
                                                                 if (controller
                                                                     .popupFormKey
@@ -324,10 +337,10 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                             .toString();
                                         print("@@@@@@");
                                         print(
-                                            "${controller.customerFilterList![index].firstName} ${controller.customerFilterList![index].lastName}");
+                                            "${controller.customerFilterList![index].firstName.toString().capitalize} ${controller.customerFilterList![index].lastName.toString().capitalize}");
                                         Get.to(const FileListView(),
                                             arguments:
-                                                "${controller.customerFilterList![index].firstName} ${controller.customerFilterList![index].lastName}");
+                                                "${controller.customerFilterList![index].firstName.toString().capitalize} ${controller.customerFilterList![index].lastName.toString().capitalize}");
                                       },
                                       child: Container(
                                           decoration: BoxDecoration(
@@ -336,217 +349,16 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                               color: Colors.white),
                                           child: Column(
                                             children: [
-                                              // Row(
-                                              //   mainAxisAlignment:
-                                              //       MainAxisAlignment.end,
-                                              //   children: [
-                                              //     CustomPopupMenu(
-                                              //       arrowSize: 0,
-                                              //       horizontalMargin: 10,
-                                              //       verticalMargin: 0,
-                                              //       pressType:
-                                              //           PressType.singleClick,
-                                              //       controller: controller
-                                              //           .popupContoller[index],
-                                              //       menuBuilder: () =>
-                                              //           Container(
-                                              //         height: 100.h,
-                                              //         width: 200.w,
-                                              //         decoration: BoxDecoration(
-                                              //             color: ConstColor
-                                              //                 .color1E3F84,
-                                              //             borderRadius:
-                                              //                 BorderRadius.all(
-                                              //                     Radius
-                                              //                         .circular(
-                                              //                             10.r)),
-                                              //             boxShadow: const [
-                                              //               BoxShadow(
-                                              //                 color:
-                                              //                     Colors.grey,
-                                              //                 blurRadius: 5.0,
-                                              //               ),
-                                              //             ]),
-                                              //         child: Padding(
-                                              //           padding:
-                                              //               const EdgeInsets
-                                              //                   .all(8.0),
-                                              //           child: Padding(
-                                              //             padding:
-                                              //                 EdgeInsets.only(
-                                              //                     left: 20.w),
-                                              //             child: Column(
-                                              //               crossAxisAlignment:
-                                              //                   CrossAxisAlignment
-                                              //                       .start,
-                                              //               children: [
-                                              //                 GestureDetector(
-                                              //                   onTap: () {
-                                              //                     controller
-                                              //                         .popupContoller[
-                                              //                             index]
-                                              //                         .hideMenu();
-                                              //                     customerId = controller
-                                              //                         .customerFilterList![
-                                              //                             index]
-                                              //                         .id
-                                              //                         .toString();
-                                              //                     Get.to(
-                                              //                         const FileListView(),
-                                              //                         arguments:
-                                              //                             "${controller.customerFilterList![index].firstName} ${controller.customerFilterList![index].lastName}");
-                                              //                   },
-                                              //                   child:
-                                              //                       CommonText(
-                                              //                     text:
-                                              //                         "Add Files",
-                                              //                     fontColor:
-                                              //                         Colors
-                                              //                             .white,
-                                              //                   ),
-                                              //                 ),
-                                              //                 SizedBox(
-                                              //                   height: 5.h,
-                                              //                 ),
-                                              //                 GestureDetector(
-                                              //                     onTap: () {
-                                              //                       controller
-                                              //                           .popupContoller[
-                                              //                               index]
-                                              //                           .hideMenu();
-                                              //                       Get.to(const AddcustomerView(),
-                                              //                               arguments: controller.customerFilterList![
-                                              //                                   index])!
-                                              //                           .then((value) =>
-                                              //                               controller.customerListApi());
-                                              //                     },
-                                              //                     child:
-                                              //                         CommonText(
-                                              //                       text:
-                                              //                           "Edit",
-                                              //                       fontColor:
-                                              //                           Colors
-                                              //                               .white,
-                                              //                     )),
-                                              //                 SizedBox(
-                                              //                   height: 5.h,
-                                              //                 ),
-                                              //                 GestureDetector(
-                                              //                     onTap: () {
-                                              //                       controller
-                                              //                           .popupContoller[
-                                              //                               index]
-                                              //                           .hideMenu();
-                                              //                       showDialog(
-                                              //                           context:
-                                              //                               context,
-                                              //                           barrierDismissible:
-                                              //                               false,
-                                              //                           barrierColor: ConstColor
-                                              //                               .textColor
-                                              //                               .withOpacity(
-                                              //                                   0.2),
-                                              //                           builder:
-                                              //                               (context) {
-                                              //                             return CommonDialogHeader(
-                                              //                               title:
-                                              //                                   "Confirmation",
-                                              //                               bgColor:
-                                              //                                   Colors.white,
-                                              //                               child:
-                                              //                                   Padding(
-                                              //                                 padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
-                                              //                                 child: Column(
-                                              //                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                              //                                   children: [
-                                              //                                     SizedBox(height: getSize(value: 63).h),
-                                              //                                     CommonText(
-                                              //                                       text: 'Are you sure you want to delete this customer?',
-                                              //                                       fontSize: 14.sp,
-                                              //                                       fontWeight: FontWeight.w400,
-                                              //                                       textAlign: TextAlign.center,
-                                              //                                     ),
-                                              //                                     Padding(
-                                              //                                       padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
-                                              //                                       child: Row(
-                                              //                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              //                                         children: [
-                                              //                                           SizedBox(
-                                              //                                             width: getSize(value: 354).w,
-                                              //                                             height: getSize(value: 88).h,
-                                              //                                             child: CommonElevatedButton(
-                                              //                                               text: "Yes".toUpperCase(),
-                                              //                                               onPressed: () {
-                                              //                                                 Get.back();
-                                              //                                                 controller.customerDelete(id: controller.customerFilterList![index].id.toString());
-                                              //                                               },
-                                              //                                               textColor: ConstColor.newBackgroundColor,
-                                              //                                               bgColor: ConstColor.newBackgroundColor,
-                                              //                                               fontWeight: FontWeight.w700,
-                                              //                                               fontSize: 14.sp,
-                                              //                                             ),
-                                              //                                           ),
-                                              //                                           SizedBox(
-                                              //                                             width: getSize(value: 354).w,
-                                              //                                             height: getSize(value: 88).h,
-                                              //                                             child: CommonTextButton(
-                                              //                                               text: "No".toUpperCase(),
-                                              //                                               onPressed: () {
-                                              //                                                 Get.back();
-                                              //                                                 // Get.back();
-                                              //                                               },
-                                              //                                               textColor: ConstColor.textColor,
-                                              //                                               fontWeight: FontWeight.w700,
-                                              //                                               fontSize: 16.sp,
-                                              //                                             ),
-                                              //                                           ),
-                                              //                                         ],
-                                              //                                       ),
-                                              //                                     ),
-                                              //                                   ],
-                                              //                                 ),
-                                              //                               ),
-                                              //                             );
-                                              //                           });
-                                              //                     },
-                                              //                     child:
-                                              //                         CommonText(
-                                              //                       text:
-                                              //                           "Delete",
-                                              //                       fontColor:
-                                              //                           Colors
-                                              //                               .white,
-                                              //                     )),
-                                              //
-                                              //                 // CommonText(text: "Edit"),
-                                              //               ],
-                                              //             ),
-                                              //           ),
-                                              //         ),
-                                              //       ),
-                                              //       child: GestureDetector(
-                                              //           onTap: () {
-                                              //             controller
-                                              //                 .popupContoller[
-                                              //                     index]
-                                              //                 .showMenu();
-                                              //           },
-                                              //           child: const Icon(
-                                              //               Icons.more_vert)),
-                                              //     ),
-                                              //   ],
-                                              // ),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         bottom: 10.h,
                                                         left: 10.w,
-                                                        top: 0),
+                                                        top: 10),
                                                     child: Row(
                                                       children: [
                                                         CachedNetworkImage(
@@ -555,9 +367,22 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                           height: 80.h,
                                                           width: 80.h,
                                                           fit: BoxFit.fitHeight,
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              const CircularProgressIndicator(),
+                                                          imageBuilder: (context,
+                                                                  imageProvider) =>
+                                                              Container(
+                                                            width: 80.h,
+                                                            height: 80.h,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              image: DecorationImage(
+                                                                  image:
+                                                                      imageProvider,
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                            ),
+                                                          ),
                                                           errorWidget: (context,
                                                                   url, error) =>
                                                               Container(
@@ -587,7 +412,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                           children: [
                                                             CommonText(
                                                                 text:
-                                                                    "${controller.customerFilterList![index].firstName} ${controller.customerFilterList![index].lastName}"),
+                                                                    "${controller.customerFilterList![index].firstName.toString().capitalize} ${controller.customerFilterList![index].lastName.toString().capitalize}"),
                                                             SizedBox(
                                                               width: 5.w,
                                                             ),
@@ -623,213 +448,233 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                   Icon(Icons.chevron_right),
                                                   Row(
                                                     children: [
-
                                                       CustomPopupMenu(
                                                         arrowSize: 0,
                                                         horizontalMargin: 10,
                                                         verticalMargin: 0,
-                                                        pressType:
-                                                        PressType.singleClick,
+                                                        pressType: PressType
+                                                            .singleClick,
                                                         controller: controller
-                                                            .popupContoller[index],
+                                                                .popupContoller[
+                                                            index],
                                                         menuBuilder: () =>
                                                             Container(
-                                                              height: 100.h,
-                                                              width: 150.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: ConstColor
-                                                                      .color1E3F84,
-                                                                  borderRadius:
-                                                                  BorderRadius.all(
-                                                                      Radius
-                                                                          .circular(
+                                                          height: 100.h,
+                                                          width: 150.w,
+                                                          decoration: BoxDecoration(
+                                                              color: ConstColor
+                                                                  .color1E3F84,
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
                                                                           10.r)),
-                                                                  boxShadow: const [
-                                                                    BoxShadow(
-                                                                      color:
-                                                                      Colors.grey,
-                                                                      blurRadius: 5.0,
-                                                                    ),
-                                                                  ]),
-                                                              child: Padding(
-                                                                padding:
+                                                              boxShadow: const [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                ),
+                                                              ]),
+                                                          child: Padding(
+                                                            padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
+                                                            child: Column(
+                                                              crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        controller
-                                                                            .popupContoller[
-                                                                        index]
-                                                                            .hideMenu();
-                                                                        customerId = controller
-                                                                            .customerFilterList![
-                                                                        index]
-                                                                            .id
-                                                                            .toString();
-                                                                        Get.to(
-                                                                            const FileListView(),
-                                                                            arguments:
-                                                                            "${controller.customerFilterList![index].firstName} ${controller.customerFilterList![index].lastName}");
-                                                                      },
-                                                                      child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Icon(Icons.add,color: Colors.white,size: 20,),
-                                                                          SizedBox(width: 10.w,),
-                                                                          CommonText(
-                                                                            text:
-                                                                            "Add Files",
-                                                                            fontColor:
-                                                                            Colors
-                                                                                .white,
-                                                                          ),
-                                                                        ],
+                                                              children: [
+                                                                GestureDetector(
+                                                                  onTap: () {
+                                                                    controller
+                                                                        .popupContoller[
+                                                                            index]
+                                                                        .hideMenu();
+                                                                    customerId = controller
+                                                                        .customerFilterList![
+                                                                            index]
+                                                                        .id
+                                                                        .toString();
+                                                                    Get.to(
+                                                                        const FileListView(),
+                                                                        arguments:
+                                                                            "${controller.customerFilterList![index].firstName.toString().capitalize} ${controller.customerFilterList![index].lastName.toString().capitalize}");
+                                                                  },
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .add,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        size:
+                                                                            20,
                                                                       ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height: 5.h,
-                                                                    ),
-                                                                    GestureDetector(
-                                                                        onTap: () {
-                                                                          controller
-                                                                              .popupContoller[
-                                                                          index]
-                                                                              .hideMenu();
-                                                                          Get.to(const AddcustomerView(),
-                                                                              arguments: controller.customerFilterList![
-                                                                              index])!
-                                                                              .then((value) =>
-                                                                              controller.customerListApi());
-                                                                        },
-                                                                        child:
-                                                                        Row(
-                                                                          children: [
-                                                                            Icon(Icons.edit,color: Colors.white,size: 20,),
-                                                                            SizedBox(width: 10.w,),
-                                                                            CommonText(
-                                                                              text:
-                                                                              "Edit",
-                                                                              fontColor:
-                                                                              Colors
-                                                                                  .white,
-                                                                            ),
-                                                                          ],
-                                                                        )),
-                                                                    SizedBox(
-                                                                      height: 5.h,
-                                                                    ),
-                                                                    GestureDetector(
-                                                                        onTap: () {
-                                                                          controller
-                                                                              .popupContoller[
-                                                                          index]
-                                                                              .hideMenu();
-                                                                          showDialog(
-                                                                              context:
-                                                                              context,
-                                                                              barrierDismissible:
-                                                                              false,
-                                                                              barrierColor: ConstColor
-                                                                                  .textColor
-                                                                                  .withOpacity(
-                                                                                  0.2),
-                                                                              builder:
-                                                                                  (context) {
-                                                                                return CommonDialogHeader(
-                                                                                  title:
-                                                                                  "Confirmation",
-                                                                                  bgColor:
-                                                                                  Colors.white,
-                                                                                  child:
-                                                                                  Padding(
-                                                                                    padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
-                                                                                    child: Column(
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        SizedBox(height: getSize(value: 63).h),
-                                                                                        CommonText(
-                                                                                          text: 'Are you sure you want to delete this customer?',
-                                                                                          fontSize: 14.sp,
-                                                                                          fontWeight: FontWeight.w400,
-                                                                                          textAlign: TextAlign.center,
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
-                                                                                          child: Row(
-                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                            children: [
-                                                                                              SizedBox(
-                                                                                                width: getSize(value: 354).w,
-                                                                                                height: getSize(value: 88).h,
-                                                                                                child: CommonElevatedButton(
-                                                                                                  text: "Yes".toUpperCase(),
-                                                                                                  onPressed: () {
-                                                                                                    Get.back();
-                                                                                                    controller.customerDelete(id: controller.customerFilterList![index].id.toString());
-                                                                                                  },
-                                                                                                  textColor: ConstColor.newBackgroundColor,
-                                                                                                  bgColor: ConstColor.newBackgroundColor,
-                                                                                                  fontWeight: FontWeight.w700,
-                                                                                                  fontSize: 14.sp,
-                                                                                                ),
-                                                                                              ),
-                                                                                              SizedBox(
-                                                                                                width: getSize(value: 354).w,
-                                                                                                height: getSize(value: 88).h,
-                                                                                                child: CommonTextButton(
-                                                                                                  text: "No".toUpperCase(),
-                                                                                                  onPressed: () {
-                                                                                                    Get.back();
-                                                                                                    // Get.back();
-                                                                                                  },
-                                                                                                  textColor: ConstColor.textColor,
-                                                                                                  fontWeight: FontWeight.w700,
-                                                                                                  fontSize: 16.sp,
-                                                                                                ),
-                                                                                              ),
-                                                                                            ],
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                );
-                                                                              });
-                                                                        },
-                                                                        child:
-                                                                        Row(
-                                                                          children: [
-                                                                            Icon(Icons.delete,color: Colors.white,size: 20,),
-                                                                            SizedBox(width: 10.w,),
-                                                                            CommonText(
-                                                                              text:
-                                                                              "Delete",
-                                                                              fontColor:
-                                                                              Colors
-                                                                                  .white,
-                                                                            ),
-                                                                          ],
-                                                                        )),
-
-                                                                    // CommonText(text: "Edit"),
-                                                                  ],
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10.w,
+                                                                      ),
+                                                                      CommonText(
+                                                                        text:
+                                                                            "Add Files",
+                                                                        fontColor:
+                                                                            Colors.white,
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              ),
+                                                                SizedBox(
+                                                                  height: 5.h,
+                                                                ),
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      controller
+                                                                          .popupContoller[
+                                                                              index]
+                                                                          .hideMenu();
+                                                                      Get.to(const AddcustomerView(),
+                                                                              arguments: controller.customerFilterList![
+                                                                                  index])!
+                                                                          .then((value) =>
+                                                                              controller.customerListApi());
+                                                                    },
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .edit,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10.w,
+                                                                        ),
+                                                                        CommonText(
+                                                                          text:
+                                                                              "Edit",
+                                                                          fontColor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ],
+                                                                    )),
+                                                                SizedBox(
+                                                                  height: 5.h,
+                                                                ),
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      controller
+                                                                          .popupContoller[
+                                                                              index]
+                                                                          .hideMenu();
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          barrierDismissible:
+                                                                              false,
+                                                                          barrierColor: ConstColor.textColor.withOpacity(
+                                                                              0.2),
+                                                                          builder:
+                                                                              (context) {
+                                                                            return CommonDialogHeader(
+                                                                              title: "Confirmation",
+                                                                              bgColor: Colors.white,
+                                                                              child: Padding(
+                                                                                padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
+                                                                                child: Column(
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    SizedBox(height: getSize(value: 63).h),
+                                                                                    CommonText(
+                                                                                      text: 'Are you sure you want to delete this customer?',
+                                                                                      fontSize: 14.sp,
+                                                                                      fontWeight: FontWeight.w400,
+                                                                                      textAlign: TextAlign.center,
+                                                                                    ),
+                                                                                    Padding(
+                                                                                      padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
+                                                                                      child: Row(
+                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                        children: [
+                                                                                          SizedBox(
+                                                                                            width: getSize(value: 354).w,
+                                                                                            height: getSize(value: 88).h,
+                                                                                            child: CommonElevatedButton(
+                                                                                              text: "Yes".toUpperCase(),
+                                                                                              onPressed: () {
+                                                                                                Get.back();
+                                                                                                controller.customerDelete(id: controller.customerFilterList![index].id.toString());
+                                                                                              },
+                                                                                              textColor: ConstColor.newBackgroundColor,
+                                                                                              bgColor: ConstColor.newBackgroundColor,
+                                                                                              fontWeight: FontWeight.w700,
+                                                                                              fontSize: 14.sp,
+                                                                                            ),
+                                                                                          ),
+                                                                                          SizedBox(
+                                                                                            width: getSize(value: 354).w,
+                                                                                            height: getSize(value: 88).h,
+                                                                                            child: CommonTextButton(
+                                                                                              text: "No".toUpperCase(),
+                                                                                              onPressed: () {
+                                                                                                Get.back();
+                                                                                                // Get.back();
+                                                                                              },
+                                                                                              textColor: ConstColor.textColor,
+                                                                                              fontWeight: FontWeight.w700,
+                                                                                              fontSize: 16.sp,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          });
+                                                                    },
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .delete,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10.w,
+                                                                        ),
+                                                                        CommonText(
+                                                                          text:
+                                                                              "Delete",
+                                                                          fontColor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ],
+                                                                    )),
+
+                                                                // CommonText(text: "Edit"),
+                                                              ],
                                                             ),
+                                                          ),
+                                                        ),
                                                         child: GestureDetector(
                                                             onTap: () {
                                                               controller
                                                                   .popupContoller[
-                                                              index]
+                                                                      index]
                                                                   .showMenu();
                                                             },
                                                             child: const Icon(
-                                                                Icons.more_vert)),
+                                                                Icons
+                                                                    .more_vert)),
                                                       ),
                                                     ],
                                                   ),
@@ -861,6 +706,8 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                         itemCount:
                                             controller.customerList.length,
                                         itemBuilder: (context, index) {
+                                          print(
+                                              'https://www.scfinvestmentgroup.com/public/upload/user_image/${controller.customerList[index].profileImage}');
                                           return Padding(
                                             padding:
                                                 EdgeInsets.only(bottom: 15.h),
@@ -871,10 +718,10 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                     .toString();
                                                 print("@@@@@@");
                                                 print(
-                                                    "${controller.customerList[index].firstName} ${controller.customerList[index].lastName}");
+                                                    "${controller.customerList[index].firstName.toString().capitalize} ${controller.customerList[index].lastName.toString().capitalize}");
                                                 Get.to(const FileListView(),
                                                     arguments:
-                                                        "${controller.customerList[index].firstName} ${controller.customerList[index].lastName}");
+                                                        "${controller.customerList[index].firstName.toString().capitalize} ${controller.customerList[index].lastName.toString().capitalize}");
                                               },
                                               child: Container(
                                                   decoration: BoxDecoration(
@@ -1016,77 +863,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                       //                                     padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
                                                       //                                     child: Row(
                                                       //                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      //                                       children: [
-                                                      //                                         SizedBox(
-                                                      //                                           width: getSize(value: 354).w,
-                                                      //                                           height: getSize(value: 88).h,
-                                                      //                                           child: CommonElevatedButton(
-                                                      //                                             text: "Yes".toUpperCase(),
-                                                      //                                             onPressed: () {
-                                                      //                                               Get.back();
-                                                      //                                               controller.customerDelete(id: controller.customerList[index].id.toString());
-                                                      //                                             },
-                                                      //                                             textColor: ConstColor.newBackgroundColor,
-                                                      //                                             bgColor: ConstColor.newBackgroundColor,
-                                                      //                                             fontWeight: FontWeight.w700,
-                                                      //                                             fontSize: 14.sp,
-                                                      //                                           ),
-                                                      //                                         ),
-                                                      //                                         SizedBox(
-                                                      //                                           width: getSize(value: 354).w,
-                                                      //                                           height: getSize(value: 88).h,
-                                                      //                                           child: CommonTextButton(
-                                                      //                                             text: "No".toUpperCase(),
-                                                      //                                             onPressed: () {
-                                                      //                                               Get.back();
-                                                      //                                             },
-                                                      //                                             textColor: ConstColor.textColor,
-                                                      //                                             fontWeight: FontWeight.w700,
-                                                      //                                             fontSize: 16.sp,
-                                                      //                                           ),
-                                                      //                                         ),
-                                                      //                                       ],
-                                                      //                                     ),
-                                                      //                                   ),
-                                                      //                                 ],
-                                                      //                               ),
-                                                      //                             ),
-                                                      //                           );
-                                                      //                         });
-                                                      //                   },
-                                                      //                   child:
-                                                      //                       Row(
-                                                      //                         children: [
-                                                      //                           Icon(Icons.delete,color: Colors.white,size: 20,),
-                                                      //                           SizedBox(width: 10.w,),
-                                                      //                           CommonText(
-                                                      //                     text:
-                                                      //                             "Delete",
-                                                      //                     fontColor:
-                                                      //                             Colors.white,
-                                                      //                   ),
-                                                      //                         ],
-                                                      //                       )),
-                                                      //
-                                                      //               // CommonText(text: "Edit"),
-                                                      //             ],
-                                                      //           ),
-                                                      //         ),
-                                                      //       ),
-                                                      //       child:
-                                                      //           GestureDetector(
-                                                      //               onTap: () {
-                                                      //                 controller
-                                                      //                     .popupContoller[
-                                                      //                         index]
-                                                      //                     .showMenu();
-                                                      //               },
-                                                      //               child: const Icon(
-                                                      //                   Icons
-                                                      //                       .more_vert)),
-                                                      //     ),
-                                                      //   ],
-                                                      // ),
+
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -1098,7 +875,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                                     bottom:
                                                                         10.h,
                                                                     left: 10.w,
-                                                                    top: 0),
+                                                                    top: 10),
                                                             child: Row(
                                                               children: [
                                                                 CachedNetworkImage(
@@ -1106,11 +883,31 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                                       "https://www.scfinvestmentgroup.com/public/upload/user_image/${controller.customerList[index].profileImage}",
                                                                   height: 80.h,
                                                                   width: 80.h,
+
                                                                   fit: BoxFit
                                                                       .fitHeight,
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      const CircularProgressIndicator(),
+                                                                  imageBuilder:
+                                                                      (context,
+                                                                              imageProvider) =>
+                                                                          Container(
+                                                                    width: 80.h,
+                                                                    height:
+                                                                        80.h,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                      image: DecorationImage(
+                                                                          image:
+                                                                              imageProvider,
+                                                                          fit: BoxFit
+                                                                              .cover),
+                                                                    ),
+                                                                  ),
+
+                                                                  // placeholder: (context,
+                                                                  //         url) =>
+                                                                  //     const CircularProgressIndicator(),
                                                                   errorWidget: (context,
                                                                           url,
                                                                           error) =>
@@ -1142,7 +939,7 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                                   children: [
                                                                     CommonText(
                                                                         text:
-                                                                            "${controller.customerList[index].firstName} ${controller.customerList[index].lastName}"),
+                                                                            "${controller.customerList[index].firstName.toString().capitalize} ${controller.customerList[index].lastName.toString().capitalize}"),
                                                                     SizedBox(
                                                                       width:
                                                                           5.w,
@@ -1171,208 +968,214 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                                     )
                                                                   ],
                                                                 ),
-
                                                               ],
                                                             ),
                                                           ),
-                                                          Icon(Icons.chevron_right),
+                                                          Icon(Icons
+                                                              .chevron_right),
                                                           Row(
                                                             children: [
                                                               CustomPopupMenu(
                                                                 arrowSize: 0,
                                                                 horizontalMargin:
-                                                                10,
-                                                                verticalMargin: 0,
+                                                                    10,
+                                                                verticalMargin:
+                                                                    0,
                                                                 pressType: PressType
                                                                     .singleClick,
-                                                                controller: controller
-                                                                    .popupContoller[
-                                                                index],
+                                                                controller:
+                                                                    controller
+                                                                            .popupContoller[
+                                                                        index],
                                                                 menuBuilder: () =>
                                                                     Container(
-                                                                      height: 100.h,
-                                                                      width: 150.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: ConstColor
-                                                                              .color1E3F84,
-                                                                          borderRadius:
+                                                                  height: 100.h,
+                                                                  width: 150.w,
+                                                                  decoration: BoxDecoration(
+                                                                      color: ConstColor
+                                                                          .color1E3F84,
+                                                                      borderRadius:
                                                                           BorderRadius.all(
-                                                                              Radius.circular(
-                                                                                  10.r)),
-                                                                          boxShadow: const [
-                                                                            BoxShadow(
-                                                                              color: Colors
-                                                                                  .grey,
-                                                                              blurRadius:
+                                                                              Radius.circular(10.r)),
+                                                                      boxShadow: const [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.grey,
+                                                                          blurRadius:
                                                                               5.0,
-                                                                            ),
-                                                                          ]),
-                                                                      child: Padding(
-                                                                        padding:
+                                                                        ),
+                                                                      ]),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
                                                                         const EdgeInsets
                                                                             .all(
                                                                             8.0),
-                                                                        child: Column(
-                                                                          crossAxisAlignment:
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
                                                                           CrossAxisAlignment
                                                                               .start,
-                                                                          children: [
-                                                                            GestureDetector(
-                                                                              onTap:
-                                                                                  () {
-                                                                                controller
-                                                                                    .popupContoller[index]
-                                                                                    .hideMenu();
-                                                                                customerId = controller
-                                                                                    .customerList[index]
-                                                                                    .id
-                                                                                    .toString();
-                                                                                print(
-                                                                                    "@@@@@@");
-                                                                                print(
-                                                                                    "${controller.customerList[index].firstName} ${controller.customerList[index].lastName}");
-                                                                                Get.to(
-                                                                                    const FileListView(),
-                                                                                    arguments: "${controller.customerList[index].firstName} ${controller.customerList[index].lastName}");
-                                                                              },
-                                                                              child:
+                                                                      children: [
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            controller.popupContoller[index].hideMenu();
+                                                                            customerId =
+                                                                                controller.customerList[index].id.toString();
+                                                                            print("@@@@@@");
+                                                                            print("${controller.customerList[index].firstName} ${controller.customerList[index].lastName}");
+                                                                            Get.to(const FileListView(),
+                                                                                arguments: "${controller.customerList[index].firstName.toString().capitalize} ${controller.customerList[index].lastName.toString().capitalize}");
+                                                                          },
+                                                                          child:
                                                                               Row(
-                                                                                children: [
-                                                                                  Icon(Icons.add,color: Colors.white,size: 20,),
-                                                                                  SizedBox(width: 10.w,),
-                                                                                  CommonText(
-                                                                                    text:
-                                                                                    "Add Files",
-                                                                                    fontColor:
-                                                                                    Colors.white,
-                                                                                  ),
-                                                                                ],
+                                                                            children: [
+                                                                              Icon(
+                                                                                Icons.add,
+                                                                                color: Colors.white,
+                                                                                size: 20,
                                                                               ),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              height:
-                                                                              5.h,
-                                                                            ),
-                                                                            GestureDetector(
-                                                                                onTap:
-                                                                                    () {
-                                                                                  controller.popupContoller[index].hideMenu();
-                                                                                  Get.to(const AddcustomerView(), arguments: controller.customerList[index])!.then((value) =>
-                                                                                      controller.customerListApi());
-                                                                                },
-                                                                                child:
-                                                                                Row(
-                                                                                  children: [
-                                                                                    Icon(Icons.edit,color: Colors.white,size: 20,),
-                                                                                    SizedBox(width: 10.w,),
-                                                                                    CommonText(
-                                                                                      text:
-                                                                                      "Edit",
-                                                                                      fontColor:
-                                                                                      Colors.white,
-                                                                                    ),
-                                                                                  ],
-                                                                                )),
-                                                                            SizedBox(
-                                                                              height:
-                                                                              5.h,
-                                                                            ),
-                                                                            GestureDetector(
-                                                                                onTap:
-                                                                                    () {
-                                                                                  controller.popupContoller[index].hideMenu();
-                                                                                  showDialog(
-                                                                                      context: context,
-                                                                                      barrierDismissible: false,
-                                                                                      barrierColor: ConstColor.textColor.withOpacity(0.2),
-                                                                                      builder: (context) {
-                                                                                        return CommonDialogHeader(
-                                                                                          title: "Confirmation",
-                                                                                          bgColor: Colors.white,
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
-                                                                                            child: Column(
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                SizedBox(height: getSize(value: 63).h),
-                                                                                                CommonText(
-                                                                                                  text: 'Are you sure you want to delete this customer?',
-                                                                                                  fontSize: 14.sp,
-                                                                                                  fontWeight: FontWeight.w400,
-                                                                                                  textAlign: TextAlign.center,
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
-                                                                                                  child: Row(
-                                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                                    children: [
-                                                                                                      SizedBox(
-                                                                                                        width: getSize(value: 354).w,
-                                                                                                        height: getSize(value: 88).h,
-                                                                                                        child: CommonElevatedButton(
-                                                                                                          text: "Yes".toUpperCase(),
-                                                                                                          onPressed: () {
-                                                                                                            Get.back();
-                                                                                                            controller.customerDelete(id: controller.customerList[index].id.toString());
-                                                                                                          },
-                                                                                                          textColor: ConstColor.newBackgroundColor,
-                                                                                                          bgColor: ConstColor.newBackgroundColor,
-                                                                                                          fontWeight: FontWeight.w700,
-                                                                                                          fontSize: 14.sp,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      SizedBox(
-                                                                                                        width: getSize(value: 354).w,
-                                                                                                        height: getSize(value: 88).h,
-                                                                                                        child: CommonTextButton(
-                                                                                                          text: "No".toUpperCase(),
-                                                                                                          onPressed: () {
-                                                                                                            Get.back();
-                                                                                                          },
-                                                                                                          textColor: ConstColor.textColor,
-                                                                                                          fontWeight: FontWeight.w700,
-                                                                                                          fontSize: 16.sp,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
-                                                                                        );
-                                                                                      });
-                                                                                },
-                                                                                child:
-                                                                                Row(
-                                                                                  children: [
-                                                                                    Icon(Icons.delete,color: Colors.white,size: 20,),
-                                                                                    SizedBox(width: 10.w,),
-                                                                                    CommonText(
-                                                                                      text:
-                                                                                      "Delete",
-                                                                                      fontColor:
-                                                                                      Colors.white,
-                                                                                    ),
-                                                                                  ],
-                                                                                )),
-
-                                                                            // CommonText(text: "Edit"),
-                                                                          ],
+                                                                              SizedBox(
+                                                                                width: 10.w,
+                                                                              ),
+                                                                              CommonText(
+                                                                                text: "Add Files",
+                                                                                fontColor: Colors.white,
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                      ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              5.h,
+                                                                        ),
+                                                                        GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              controller.popupContoller[index].hideMenu();
+                                                                              Get.to(const AddcustomerView(), arguments: controller.customerList[index])!.then((value) => controller.customerListApi());
+                                                                            },
+                                                                            child:
+                                                                                Row(
+                                                                              children: [
+                                                                                Icon(
+                                                                                  Icons.edit,
+                                                                                  color: Colors.white,
+                                                                                  size: 20,
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 10.w,
+                                                                                ),
+                                                                                CommonText(
+                                                                                  text: "Edit",
+                                                                                  fontColor: Colors.white,
+                                                                                ),
+                                                                              ],
+                                                                            )),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              5.h,
+                                                                        ),
+                                                                        GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              controller.popupContoller[index].hideMenu();
+                                                                              showDialog(
+                                                                                  context: context,
+                                                                                  barrierDismissible: false,
+                                                                                  barrierColor: ConstColor.textColor.withOpacity(0.2),
+                                                                                  builder: (context) {
+                                                                                    return CommonDialogHeader(
+                                                                                      title: "Confirmation",
+                                                                                      bgColor: Colors.white,
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
+                                                                                        child: Column(
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            SizedBox(height: getSize(value: 63).h),
+                                                                                            CommonText(
+                                                                                              text: 'Are you sure you want to delete this customer?',
+                                                                                              fontSize: 14.sp,
+                                                                                              fontWeight: FontWeight.w400,
+                                                                                              textAlign: TextAlign.center,
+                                                                                            ),
+                                                                                            Padding(
+                                                                                              padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
+                                                                                              child: Row(
+                                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                children: [
+                                                                                                  SizedBox(
+                                                                                                    width: getSize(value: 354).w,
+                                                                                                    height: getSize(value: 88).h,
+                                                                                                    child: CommonElevatedButton(
+                                                                                                      text: "Yes".toUpperCase(),
+                                                                                                      onPressed: () {
+                                                                                                        Get.back();
+                                                                                                        controller.customerDelete(id: controller.customerList[index].id.toString());
+                                                                                                      },
+                                                                                                      textColor: ConstColor.newBackgroundColor,
+                                                                                                      bgColor: ConstColor.newBackgroundColor,
+                                                                                                      fontWeight: FontWeight.w700,
+                                                                                                      fontSize: 14.sp,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                  SizedBox(
+                                                                                                    width: getSize(value: 354).w,
+                                                                                                    height: getSize(value: 88).h,
+                                                                                                    child: CommonTextButton(
+                                                                                                      text: "No".toUpperCase(),
+                                                                                                      onPressed: () {
+                                                                                                        Get.back();
+                                                                                                      },
+                                                                                                      textColor: ConstColor.textColor,
+                                                                                                      fontWeight: FontWeight.w700,
+                                                                                                      fontSize: 16.sp,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  });
+                                                                            },
+                                                                            child:
+                                                                                Row(
+                                                                              children: [
+                                                                                Icon(
+                                                                                  Icons.delete,
+                                                                                  color: Colors.white,
+                                                                                  size: 20,
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 10.w,
+                                                                                ),
+                                                                                CommonText(
+                                                                                  text: "Delete",
+                                                                                  fontColor: Colors.white,
+                                                                                ),
+                                                                              ],
+                                                                            )),
+
+                                                                        // CommonText(text: "Edit"),
+                                                                      ],
                                                                     ),
+                                                                  ),
+                                                                ),
                                                                 child:
-                                                                GestureDetector(
-                                                                    onTap: () {
-                                                                      controller
-                                                                          .popupContoller[
-                                                                      index]
-                                                                          .showMenu();
-                                                                    },
-                                                                    child: const Icon(
-                                                                        Icons
-                                                                            .more_vert)),
+                                                                    GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          controller
+                                                                              .popupContoller[index]
+                                                                              .showMenu();
+                                                                        },
+                                                                        child: const Icon(
+                                                                            Icons.more_vert)),
                                                               ),
                                                             ],
                                                           ),

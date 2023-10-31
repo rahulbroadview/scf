@@ -58,7 +58,7 @@ class AddLoanCategoryController extends GetxController {
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
     Map data = {
-      "loan_type": loanName.text.trim(),
+      // "loan_type": loanName.text.trim(),
       "category_name": categoryName.text.trim(),
       "login_id": id,
       "token": token

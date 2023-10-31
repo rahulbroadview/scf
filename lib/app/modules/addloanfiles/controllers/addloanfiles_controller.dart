@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,6 @@ import '../../../data/services/api_services.dart';
 class AddLoanFilesController extends GetxController {
   final documentName = TextEditingController();
   final bankController = TextEditingController();
-  final loanAmount = TextEditingController();
   final staffKey = GlobalKey<FormState>();
   bool hasVehicle = false;
   File? customerImage;
@@ -19,17 +19,19 @@ class AddLoanFilesController extends GetxController {
 
   List<LoanTypeList> loanList = [];
   LoanTypeList? selectedLoanType;
+  bool moreFile = false;
+  List requireFileList = [];
 
-  List<String> requireFileList = [
-    "Pan card",
-    "Adhar card",
-    "Home light bill current month",
-    "Salary bank account statement 1 year",
-    "Salary slip 6 month",
-    "Photos",
-    "Bank account statement 1 year"
-  ];
-  List<String> collectFileList = [];
+  // List<String> requireFileList = [
+  //   "Pan card",
+  //   "Adhar card",
+  //   "Home light bill current month",
+  //   "Salary bank account statement 1 year",
+  //   "Salary slip 6 month",
+  //   "Photos",
+  //   "Bank account statement 1 year"
+  // ];
+  List collectFileList = [];
 
   final count = 0.obs;
 
@@ -44,6 +46,8 @@ class AddLoanFilesController extends GetxController {
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
     Map data = {"token": token, "login_id": id};
+    print(jsonEncode(data));
+    print(UrlUtils.loanListUrl);
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.loanListUrl, data);
     if (finalData != null) {
@@ -67,17 +71,35 @@ class AddLoanFilesController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
+
     Map data = {
       "loan_category_id": selectedLoanType!.id.toString(),
-      "document_name": collectFileList.join(", "),
       "login_id": id,
       "token": token
     };
     var finalData = await APIServices.postWithDioForlogin(
-        UrlUtils.addCategoryDocument, data);
+        UrlUtils.listCategoryDocument, data);
     if (finalData != null) {
-      print("-----finalData-----$finalData");
-      Get.back();
+      requireFileList = finalData['response'];
+    }
+    update();
+  }
+
+  updateDocumentApi() async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    String id = prefs.getString('id') ?? '';
+    Map data = {
+      "loan_category_id": selectedLoanType!.id.toString(),
+      "document_name": documentName.text.trim(),
+      "login_id": id,
+      "token": token
+    };
+    var finalData = await APIServices.postWithDioForlogin(
+        UrlUtils.updateCategoryDcument, data);
+    if (finalData != null) {
+      // print("-----finalData-----$finalData");
+      // Get.back();
       // FileListModel userData = FileListModel.fromJson(finalData);
       // if (userData.response != null) {
       //   fileList = userData.response!;

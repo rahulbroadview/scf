@@ -47,6 +47,8 @@ class DashboardView extends GetView<DashboardController> {
                           ),
                           GestureDetector(
                               onTap: () {
+                                // controller.versionList();
+
                                 showDialog(
                                     context: context,
                                     barrierDismissible: false,

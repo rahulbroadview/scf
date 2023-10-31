@@ -180,6 +180,49 @@ class EditProfile extends GetView<MyprofileController> {
                           SizedBox(
                             height: 15.h,
                           ),
+
+                          Container(
+                            height: 50.h,
+                            decoration: BoxDecoration(
+                                color: ConstColor.buttonColor,
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    flex: 8,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(8.r),
+                                              bottomLeft:
+                                                  Radius.circular(8.r))),
+                                      child: Center(
+                                          child: CommonText(
+                                              text:
+                                                  controller.imageName ?? '')),
+                                    )),
+                                Expanded(
+                                    flex: 4,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.imageUpload();
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: CommonText(
+                                            text: "Upload",
+                                            fontColor: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
                           // Container(
                           //   height: 50.h,
                           //   decoration: BoxDecoration(

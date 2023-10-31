@@ -13,16 +13,19 @@ class UrlUtils {
   static const String fileListUrl = "${baseUrl}filePagination";
   static const String loanListUrl = "${baseUrl}categoryList";
   static const String createFileUrl = "${baseUrl}createFile";
+  static const String updateFileUrl = "${baseUrl}updateFile";
   static const String customerFilter = "${baseUrl}customerFilter";
   static const String customerDelete = "${baseUrl}deleteUser";
   static const String allFilesList = "${baseUrl}filePagination";
   static const String customerFileListUrl = "${baseUrl}fileCustomerPagination";
   static const String assignFileToStaff = "${baseUrl}assignStaffToFile";
+  static const String deleteFileToStaff = "${baseUrl}deleteFile";
   static const String fileFilterList = "${baseUrl}fileFilter";
 
 //-----------------staff url ----------------------
 
   static const String staffFileList = "${baseUrl}staffFileList";
+  static const String staffFileListFilter = "${baseUrl}staffFileFilter";
   static const String myProfileUrl = "${baseUrl}userProfile";
   static const String staffWiseCustomerList = "${baseUrl}staffWiseCustomerList";
   static const String showFileDocuments = "${baseUrl}showFiledocuments";
@@ -37,7 +40,12 @@ class UrlUtils {
 
   static const String addCategory = "${baseUrl}addCategory";
   static const String addCategoryDocument = "${baseUrl}addCategoryDocument";
+  static const String listCategoryDocument =
+      "${baseUrl}listLoanCategoryDocument";
+  static const String updateCategoryDcument =
+      "${baseUrl}updateCategoryDocument";
   static const String checkVersion = "${baseUrl}checkVersion";
+  static const String exportUser = "${baseUrl}exportUsers";
 }
 
 // https://www.scfinvestmentgroup.com/public/api/storeUser

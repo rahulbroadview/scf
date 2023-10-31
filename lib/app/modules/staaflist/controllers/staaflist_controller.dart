@@ -8,6 +8,7 @@ import 'package:pay_day_manager/app/data/services/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../models/stafflist_model.dart';
+import '../../../core/them/const_color.dart';
 
 class StaaflistController extends GetxController {
   List<StaffList> staffList = [];
@@ -60,6 +61,24 @@ class StaaflistController extends GetxController {
                 .toLowerCase()
                 .contains(searchText.toLowerCase()))
         .toList();
+    update();
+  }
+
+  staffDelete({String? id}) async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    String id1 = prefs.getString('id') ?? '';
+    Map data = {"id": id, "token": token, "login_id": id1};
+    print(jsonEncode(data));
+    print(UrlUtils.customerDelete);
+    var finalData =
+        await APIServices.postWithDioForlogin(UrlUtils.customerDelete, data);
+    if (finalData != null) {
+      Get.rawSnackbar(
+          message: finalData['response'],
+          backgroundColor: ConstColor.color009846);
+      await staffListApi();
+    }
     update();
   }
 }

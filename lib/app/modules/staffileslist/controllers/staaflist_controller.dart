@@ -302,11 +302,16 @@ class StaffFileListController extends GetxController {
     Map data = {
       "login_id": id,
       "token": token,
-      "from_date": fromDateController.text.trim(),
-      "to_date": toDateController.text.trim(),
+      // "from_date": fromDateController.text.trim(),
+      // "to_date": toDateController.text.trim(),
+      if (fromDateController.text.isNotEmpty)
+        "from_date": fromDateController.text.trim(),
+      if (toDateController.text.isNotEmpty)
+        "to_date": toDateController.text.trim(),
+      if (selectedFileStatus != null) "file_status": selectedFileStatus
     };
     var finalData = await APIServices.postWithDioForlogin(
-      UrlUtils.staffFileList,
+      UrlUtils.staffFileListFilter,
       data,
     );
     if (finalData != null) {

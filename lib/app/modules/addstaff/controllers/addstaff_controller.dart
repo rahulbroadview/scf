@@ -55,6 +55,10 @@ class AddstaffController extends GetxController {
       print(staffData!.userProfile!.birthdate);
       address1eController.text = staffData!.userProfile!.address1 ?? '';
       address2Controller.text = staffData!.userProfile!.address2 ?? '';
+      if (staffData!.profileImage != null) {
+        imageName =
+            "https://www.scfinvestmentgroup.com/public/upload/user_image/${staffData!.profileImage}";
+      }
       birthController.text = staffData!.userProfile!.birthdate != null
           ? DateFormat('dd-MM-yyyy').format(
               DateTime.parse(staffData!.userProfile!.birthdate.toString()))
@@ -145,6 +149,9 @@ class AddstaffController extends GetxController {
       birthController.clear();
       staffListController.staffListApi();
       Get.back();
+      Get.rawSnackbar(
+          message: response['response'],
+          backgroundColor: ConstColor.color009846);
     }
   }
 

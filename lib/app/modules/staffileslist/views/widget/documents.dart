@@ -21,6 +21,7 @@ class DocumentsView extends StatefulWidget {
 class _DocumentsViewState extends State<DocumentsView> {
   List<FileDetailsList> fileDetailsList = [];
   List<String> collectFileList = [];
+  List<String> notCollectFileList = [];
   @override
   void initState() {
     super.initState();
@@ -47,6 +48,8 @@ class _DocumentsViewState extends State<DocumentsView> {
         for (int i = 0; i < fileDetailsList.length; i++) {
           if (fileDetailsList[i].isCollect != 'No') {
             collectFileList.add(fileDetailsList[i].documentName!);
+          } else {
+            notCollectFileList.add(fileDetailsList[i].documentName!);
           }
         }
       }
@@ -63,63 +66,135 @@ class _DocumentsViewState extends State<DocumentsView> {
           height: 10.h,
         ),
         Expanded(
-          child: collectFileList.isNotEmpty
+          child: collectFileList.isNotEmpty || notCollectFileList.isNotEmpty
               ? ListView.builder(
                   shrinkWrap: true,
-                  itemCount: 1,
+                  itemCount: 2,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          bottom: 10.h, left: 15.w, right: 15.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 1.0,
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: 'Document Collected',
-                                fontColor: Colors.grey,
-                                fontSize: 12.sp,
-                              ),
-                              SizedBox(
-                                height: 3.h,
-                              ),
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: collectFileList.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(top: 3.h),
-                                    child: CommonText(
-                                      text: collectFileList[index],
-                                      fontColor: Colors.black,
-                                      fontSize: 14.sp,
+                    return index == 0
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 10.h, left: 15.w, right: 15.w),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 1.0,
                                     ),
-                                  );
-                                },
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText(
+                                      text: 'Collected Document',
+                                      fontColor: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: collectFileList.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(top: 5.h),
+                                          child: Row(
+                                            children: [
+                                              CommonText(
+                                                text: '${index + 1}. ',
+                                                fontColor: Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              Expanded(
+                                                child: CommonText(
+                                                  text: collectFileList[index],
+                                                  fontColor: Colors.black,
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                            ),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 10.h, left: 15.w, right: 15.w),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 1.0,
+                                    ),
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText(
+                                      text: 'Not Collected Document',
+                                      fontColor: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: notCollectFileList.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(top: 5.h),
+                                          child: Row(
+                                            children: [
+                                              CommonText(
+                                                text: '${index + 1}. ',
+                                                fontColor: Colors.red,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              Expanded(
+                                                child: CommonText(
+                                                  text:
+                                                      notCollectFileList[index],
+                                                  fontColor: Colors.red,
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
                   },
                 )
               : Center(
                   child: CommonText(text: 'No Document Collected.'),
                 ),
-        )
+        ),
       ],
     ));
   }

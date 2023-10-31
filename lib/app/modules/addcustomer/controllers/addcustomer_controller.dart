@@ -47,6 +47,10 @@ class AddcustomerController extends GetxController {
               DateTime.parse(customerData!.userProfile!.birthdate.toString()))
           : '';
 
+      if (customerData!.profileImage != null) {
+        imageName =
+            "https://www.scfinvestmentgroup.com/public/upload/user_image/${customerData!.profileImage}";
+      }
       // passwordcontroller.text = customerData.userProfile.p
     }
     update();
@@ -105,6 +109,9 @@ class AddcustomerController extends GetxController {
       address2Controller.clear();
       birthController.clear();
       Get.back();
+      Get.rawSnackbar(
+          message: response['response'],
+          backgroundColor: ConstColor.color009846);
     }
   }
 

@@ -42,7 +42,9 @@ class FileList {
   String? isDeleted;
   String? createdAt;
   String? updatedAt;
+  ViewStaff? viewStaff;
   ViewUser? viewUser;
+  ViewCategory? viewCategory;
 
   FileList(
       {this.id,
@@ -59,7 +61,9 @@ class FileList {
       this.isDeleted,
       this.createdAt,
       this.updatedAt,
-      this.viewUser});
+      this.viewStaff,
+      this.viewUser,
+      this.viewCategory});
 
   FileList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -76,8 +80,14 @@ class FileList {
     isDeleted = json['is_deleted'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    viewStaff = json['view_staff'] != null
+        ? ViewStaff.fromJson(json['view_staff'])
+        : null;
     viewUser =
         json['view_user'] != null ? ViewUser.fromJson(json['view_user']) : null;
+    viewCategory = json['view_category'] != null
+        ? ViewCategory.fromJson(json['view_category'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -96,14 +106,20 @@ class FileList {
     data['is_deleted'] = isDeleted;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    if (viewStaff != null) {
+      data['view_staff'] = viewStaff!.toJson();
+    }
     if (viewUser != null) {
       data['view_user'] = viewUser!.toJson();
+    }
+    if (viewCategory != null) {
+      data['view_category'] = viewCategory!.toJson();
     }
     return data;
   }
 }
 
-class ViewUser {
+class ViewStaff {
   int? id;
   String? userType;
   String? firstName;
@@ -113,12 +129,13 @@ class ViewUser {
   String? profileImage;
   String? status;
   String? isDeleted;
-  Null? token;
+  String? token;
   String? createdAt;
   String? updatedAt;
   Null? deviceToken;
+  Null? otp;
 
-  ViewUser(
+  ViewStaff(
       {this.id,
       this.userType,
       this.firstName,
@@ -131,9 +148,10 @@ class ViewUser {
       this.token,
       this.createdAt,
       this.updatedAt,
-      this.deviceToken});
+      this.deviceToken,
+      this.otp});
 
-  ViewUser.fromJson(Map<String, dynamic> json) {
+  ViewStaff.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userType = json['user_type'];
     firstName = json['first_name'];
@@ -147,6 +165,7 @@ class ViewUser {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deviceToken = json['device_token'];
+    otp = json['otp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -164,6 +183,113 @@ class ViewUser {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['device_token'] = deviceToken;
+    data['otp'] = otp;
+    return data;
+  }
+}
+
+class ViewUser {
+  int? id;
+  String? userType;
+  String? firstName;
+  String? lastName;
+  String? mobileNo;
+  String? userEmail;
+  String? profileImage;
+  String? status;
+  String? isDeleted;
+  String? token;
+  String? createdAt;
+  String? updatedAt;
+  String? deviceToken;
+  String? otp;
+
+  ViewUser(
+      {this.id,
+      this.userType,
+      this.firstName,
+      this.lastName,
+      this.mobileNo,
+      this.userEmail,
+      this.profileImage,
+      this.status,
+      this.isDeleted,
+      this.token,
+      this.createdAt,
+      this.updatedAt,
+      this.deviceToken,
+      this.otp});
+
+  ViewUser.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userType = json['user_type'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    mobileNo = json['mobile_no'];
+    userEmail = json['user_email'];
+    profileImage = json['profile_image'];
+    status = json['status'];
+    isDeleted = json['is_deleted'];
+    token = json['token'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deviceToken = json['device_token'];
+    otp = json['otp'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_type'] = userType;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['mobile_no'] = mobileNo;
+    data['user_email'] = userEmail;
+    data['profile_image'] = profileImage;
+    data['status'] = status;
+    data['is_deleted'] = isDeleted;
+    data['token'] = token;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['device_token'] = deviceToken;
+    data['otp'] = otp;
+    return data;
+  }
+}
+
+class ViewCategory {
+  int? id;
+  String? categoryName;
+  String? status;
+  String? isDeleted;
+  String? createdAt;
+  String? updatedAt;
+
+  ViewCategory(
+      {this.id,
+      this.categoryName,
+      this.status,
+      this.isDeleted,
+      this.createdAt,
+      this.updatedAt});
+
+  ViewCategory.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    categoryName = json['category_name'];
+    status = json['status'];
+    isDeleted = json['is_deleted'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['category_name'] = categoryName;
+    data['status'] = status;
+    data['is_deleted'] = isDeleted;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

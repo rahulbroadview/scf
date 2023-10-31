@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:pay_day_manager/app/common_widgets/common_text_formfield.dart';
 
 import '../../../../models/loan_type_model.dart';
 import '../../../common_widgets/common_elevated_button.dart';
@@ -118,6 +119,7 @@ class AddLoanFilesView extends GetView<AddLoanFilesController> {
                                     value: controller.selectedLoanType,
                                     onChanged: (LoanTypeList? newValue) {
                                       controller.selectedLoanType = newValue;
+                                      controller.addFileListApi();
                                       controller.update();
                                     },
                                     icon: const Icon(Icons.keyboard_arrow_down),
@@ -175,35 +177,36 @@ class AddLoanFilesView extends GetView<AddLoanFilesController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      controller.collectFileList.contains(
-                                              controller.requireFileList[index])
-                                          ? Container(
-                                              height: 25.h,
-                                              width: 25.h,
-                                              decoration: BoxDecoration(
-                                                color: ConstColor.buttonColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(4.r),
-                                                // border:
-                                                //     Border.all(width: 1, color: Colors.black),
-                                              ),
-                                              child: Icon(
-                                                Icons.check,
-                                                size: 20.w,
-                                                color: Colors.white,
-                                              ),
-                                            )
-                                          : Container(
-                                              height: 25.h,
-                                              width: 25.h,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.r),
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Colors.black)),
-                                            ),
+                                      CommonText(text: "${index + 1}."),
+                                      // controller.collectFileList.contains(
+                                      //         controller.requireFileList[index])
+                                      //     ? Container(
+                                      //         height: 25.h,
+                                      //         width: 25.h,
+                                      //         decoration: BoxDecoration(
+                                      //           color: ConstColor.buttonColor,
+                                      //           borderRadius:
+                                      //               BorderRadius.circular(4.r),
+                                      //           // border:
+                                      //           //     Border.all(width: 1, color: Colors.black),
+                                      //         ),
+                                      //         child: Icon(
+                                      //           Icons.check,
+                                      //           size: 20.w,
+                                      //           color: Colors.white,
+                                      //         ),
+                                      //       )
+                                      //     : Container(
+                                      //         height: 25.h,
+                                      //         width: 25.h,
+                                      //         decoration: BoxDecoration(
+                                      //             borderRadius:
+                                      //                 BorderRadius.circular(
+                                      //                     4.r),
+                                      //             border: Border.all(
+                                      //                 width: 1,
+                                      //                 color: Colors.black)),
+                                      //       ),
                                       SizedBox(
                                         width: 10.w,
                                       ),
@@ -249,8 +252,67 @@ class AddLoanFilesView extends GetView<AddLoanFilesController> {
                           //   },
                           // ),
                           SizedBox(
-                            height: 15.h,
+                            height: 20.h,
                           ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.moreFile = true;
+                                  controller.update();
+                                },
+                                child: CommonText(
+                                  text: "Add More  Documents",
+                                  fontSize: 14.sp,
+                                  fontColor: ConstColor.buttonColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              controller.moreFile
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        controller.moreFile = false;
+                                        controller.update();
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 15.r,
+                                        backgroundColor: ConstColor.buttonColor,
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.remove,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          ),
+                          controller.moreFile
+                              ? Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    CommonTextFormField(
+                                      fillColor: Colors.white,
+                                      borderColor: Colors.white,
+                                      hintText: "Document Name",
+                                      controller: controller.documentName,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Please enter document name";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox(),
+
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -266,7 +328,7 @@ class AddLoanFilesView extends GetView<AddLoanFilesController> {
                                         onPressed: () {
                                           if (controller.staffKey.currentState!
                                               .validate()) {
-                                            controller.addFileListApi();
+                                            controller.updateDocumentApi();
                                             // controller.staffListApi();
                                           }
                                         })),

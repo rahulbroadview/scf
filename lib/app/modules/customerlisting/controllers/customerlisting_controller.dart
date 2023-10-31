@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,11 +39,6 @@ class CustomerlistingController extends GetxController {
         print("=========##");
         page = page + 1;
         customerListApi2();
-        // for (int i = 0; i < 2; i++) {
-        //   listLength++;
-        //   list.add(Model(name: (listLength).toString()));
-        //   update();
-        // }
       }
     });
   }
@@ -55,6 +52,8 @@ class CustomerlistingController extends GetxController {
 
   customerListApi() async {
     page = 1;
+    // customerList = [];
+    // popupContoller = [];
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
@@ -70,6 +69,7 @@ class CustomerlistingController extends GetxController {
         popupContoller.add(CustomPopupMenuController());
       }
     }
+    print(customerList.length);
     update();
   }
 
@@ -143,12 +143,17 @@ class CustomerlistingController extends GetxController {
   customerDelete({String? id}) async {
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
-    String id = prefs.getString('id') ?? '';
-    Map data = {"id": id, "token": token, "login_id": id};
+    String id1 = prefs.getString('id') ?? '';
+    Map data = {"id": id, "token": token, "login_id": id1};
+    print(jsonEncode(data));
+    print(UrlUtils.customerDelete);
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.customerDelete, data);
     if (finalData != null) {
       // Get.back();
+      Get.rawSnackbar(
+          message: finalData['response'],
+          backgroundColor: ConstColor.color009846);
       customerListApi();
     }
     update();

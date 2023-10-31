@@ -119,7 +119,7 @@ class ForgotPasswordView extends GetView<LoginController> {
                                     height: 50.h,
                                     width: 335.h,
                                     child: CommonElevatedButton(
-                                        text: 'Forgot Password1',
+                                        text: 'Forgot Password',
                                         onPressed: () {
                                           print("======");
                                           if (controller

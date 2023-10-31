@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,20 @@ class StaaflistView extends GetView<StaaflistController> {
     return GetBuilder<StaaflistController>(builder: (context) {
       return SafeArea(
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.to(const AddstaffView())!.then((value) {
+                // if (controller.refreshList) {
+                controller.staffListApi();
+                // }
+              });
+            },
+            backgroundColor: ConstColor.buttonColor,
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
           body: Column(
             children: [
               Container(
@@ -53,23 +68,23 @@ class StaaflistView extends GetView<StaaflistController> {
                               )
                             ],
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(const AddstaffView())!.then((value) {
-                                // if (controller.refreshList) {
-                                controller.staffListApi();
-                                // }
-                              });
-                            },
-                            child: CircleAvatar(
-                              radius: 12.r,
-                              backgroundColor: ConstColor.buttonColor,
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Get.to(const AddstaffView())!.then((value) {
+                          //       // if (controller.refreshList) {
+                          //       controller.staffListApi();
+                          //       // }
+                          //     });
+                          //   },
+                          //   child: CircleAvatar(
+                          //     radius: 12.r,
+                          //     backgroundColor: ConstColor.buttonColor,
+                          //     child: const Icon(
+                          //       Icons.add,
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -187,29 +202,37 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                         arguments:
                                                                             controller.staffList[index]);
                                                                   },
-                                                                  child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Icon(Icons.edit,color: Colors.white,size: 20,),
-                                                                          SizedBox(width: 10.w,),
-                                                                          CommonText(
-                                                                    text:
-                                                                            "Edit",
-                                                                    fontColor:
-                                                                            Colors
-                                                                                .white,
-                                                                  ),
-                                                                        ],
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .edit,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        size:
+                                                                            20,
                                                                       ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            10.w,
+                                                                      ),
+                                                                      CommonText(
+                                                                        text:
+                                                                            "Edit",
+                                                                        fontColor:
+                                                                            Colors.white,
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                                 SizedBox(
                                                                   height: 5.h,
                                                                 ),
                                                                 GestureDetector(
-                                                                    onTap:
-                                                                        () {
+                                                                    onTap: () {
                                                                       controller
-                                                                          .popupContoller[index]
+                                                                          .popupContoller[
+                                                                              index]
                                                                           .hideMenu();
                                                                       Get.to(
                                                                           const DetailsView(),
@@ -220,36 +243,46 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                       //     arguments:
                                                                       //         controller.customerList[index]);
                                                                     },
-                                                                    child:
-                                                                        Row(
-                                                                          children: [
-                                                                            Icon(Icons.remove_red_eye,color: Colors.white,size: 20,),
-                                                                            SizedBox(width: 10.w,),
-                                                                            CommonText(
-                                                                      text:
-                                                                              "View",
-                                                                      fontColor:
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .remove_red_eye,
+                                                                          color:
                                                                               Colors.white,
-                                                                    ),
-                                                                          ],
-                                                                        )),
+                                                                          size:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10.w,
+                                                                        ),
+                                                                        CommonText(
+                                                                          text:
+                                                                              "View",
+                                                                          fontColor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ],
+                                                                    )),
                                                                 SizedBox(
                                                                   height: 5.h,
                                                                 ),
                                                                 GestureDetector(
-                                                                    onTap:
-                                                                        () {
+                                                                    onTap: () {
                                                                       controller
-                                                                          .popupContoller[index]
+                                                                          .popupContoller[
+                                                                              index]
                                                                           .hideMenu();
                                                                       showDialog(
                                                                           context:
                                                                               context,
                                                                           barrierDismissible:
                                                                               false,
-                                                                          barrierColor:
-                                                                              ConstColor.textColor.withOpacity(0.2),
-                                                                          builder: (context) {
+                                                                          barrierColor: ConstColor.textColor.withOpacity(
+                                                                              0.2),
+                                                                          builder:
+                                                                              (context) {
                                                                             return CommonDialogHeader(
                                                                               title: "Confirmation",
                                                                               bgColor: Colors.white,
@@ -260,7 +293,7 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                                   children: [
                                                                                     SizedBox(height: getSize(value: 63).h),
                                                                                     CommonText(
-                                                                                      text: 'Are you sure you want to delete this customer?',
+                                                                                      text: 'Are you sure you want to delete this staff?',
                                                                                       fontSize: 14.sp,
                                                                                       fontWeight: FontWeight.w400,
                                                                                       textAlign: TextAlign.center,
@@ -277,6 +310,7 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                                               text: "Yes".toUpperCase(),
                                                                                               onPressed: () {
                                                                                                 Get.back();
+                                                                                                controller.staffDelete(id: controller.staffFilterList![index].id.toString());
                                                                                                 // controller.customerDelete(id: controller.customerList[index].id.toString());
                                                                                               },
                                                                                               textColor: ConstColor.newBackgroundColor,
@@ -291,7 +325,6 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                                             child: CommonTextButton(
                                                                                               text: "No".toUpperCase(),
                                                                                               onPressed: () {
-                                                                                                Get.back();
                                                                                                 Get.back();
                                                                                               },
                                                                                               textColor: ConstColor.textColor,
@@ -308,19 +341,28 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                             );
                                                                           });
                                                                     },
-                                                                    child:
-                                                                        Row(
-                                                                          children: [
-                                                                            Icon(Icons.delete,color: Colors.white,size: 20,),
-                                                                            SizedBox(width: 10.w,),
-                                                                            CommonText(
-                                                                      text:
-                                                                              "Delete",
-                                                                      fontColor:
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .delete,
+                                                                          color:
                                                                               Colors.white,
-                                                                    ),
-                                                                          ],
-                                                                        )),
+                                                                          size:
+                                                                              20,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10.w,
+                                                                        ),
+                                                                        CommonText(
+                                                                          text:
+                                                                              "Delete",
+                                                                          fontColor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ],
+                                                                    )),
 
                                                                 // CommonText(text: "Edit"),
                                                               ],
@@ -352,20 +394,51 @@ class StaaflistView extends GetView<StaaflistController> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            Container(
-                                                              height: 50.h,
-                                                              width: 50.h,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(10
-                                                                              .r),
-                                                                  color: ConstColor
-                                                                      .profileBackgroundColor),
-                                                              child: Center(
-                                                                child: SvgPicture
-                                                                    .asset(
-                                                                        "assets/assets_svg/person.svg"),
+                                                            CachedNetworkImage(
+                                                              imageUrl:
+                                                                  "https://www.scfinvestmentgroup.com/public/upload/user_image/${controller.staffFilterList![index].profileImage}",
+                                                              height: 60.h,
+                                                              width: 60.h,
+                                                              fit: BoxFit
+                                                                  .fitHeight,
+                                                              imageBuilder:
+                                                                  (context,
+                                                                          imageProvider) =>
+                                                                      Container(
+                                                                width: 60.h,
+                                                                height: 60.h,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  image: DecorationImage(
+                                                                      image:
+                                                                          imageProvider,
+                                                                      fit: BoxFit
+                                                                          .cover),
+                                                                ),
+                                                              ),
+
+                                                              // placeholder: (context,
+                                                              //         url) =>
+                                                              //     const CircularProgressIndicator(),
+                                                              errorWidget:
+                                                                  (context, url,
+                                                                          error) =>
+                                                                      Container(
+                                                                height: 50.h,
+                                                                width: 50.h,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(10
+                                                                            .r),
+                                                                    color: ConstColor
+                                                                        .profileBackgroundColor),
+                                                                child: Center(
+                                                                  child: SvgPicture
+                                                                      .asset(
+                                                                          "assets/assets_svg/person.svg"),
+                                                                ),
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -378,7 +451,7 @@ class StaaflistView extends GetView<StaaflistController> {
                                                               children: [
                                                                 CommonText(
                                                                   text:
-                                                                      "${controller.staffFilterList![index].firstName} ${controller.staffFilterList![index].lastName}",
+                                                                      "${controller.staffFilterList![index].firstName.toString().capitalize} ${controller.staffFilterList![index].lastName.toString().capitalize}",
                                                                   maxLine: 1,
                                                                   overflow:
                                                                       TextOverflow
@@ -419,24 +492,24 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                       Icons
                                                                           .phone,
                                                                       size:
-                                                                      14.h,
+                                                                          14.h,
                                                                       color: ConstColor
                                                                           .greyTextColor,
                                                                     ),
                                                                     SizedBox(
                                                                       width:
-                                                                      5.w,
+                                                                          5.w,
                                                                     ),
                                                                     CommonText(
                                                                         text: controller
                                                                             .staffFilterList![
-                                                                        index]
+                                                                                index]
                                                                             .mobileNo
                                                                             .toString(),
                                                                         fontSize: 12
                                                                             .h,
                                                                         fontColor:
-                                                                        ConstColor.greyTextColor),
+                                                                            ConstColor.greyTextColor),
                                                                   ],
                                                                 ),
                                                               ],
@@ -486,6 +559,8 @@ class StaaflistView extends GetView<StaaflistController> {
                                     shrinkWrap: true,
                                     itemCount: controller.staffList.length,
                                     itemBuilder: (context, index) {
+                                      print(controller
+                                          .staffList[index].profileImage);
                                       return Padding(
                                         padding: EdgeInsets.only(bottom: 15.h),
                                         child: Container(
@@ -495,219 +570,9 @@ class StaaflistView extends GetView<StaaflistController> {
                                                 color: Colors.white),
                                             child: Column(
                                               children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    CustomPopupMenu(
-                                                      arrowSize: 0,
-                                                      verticalMargin: 0,
-                                                      horizontalMargin: 10,
-                                                      pressType:
-                                                          PressType.singleClick,
-                                                      controller: controller
-                                                              .popupContoller[
-                                                          index],
-                                                      menuBuilder: () =>
-                                                          Container(
-                                                        height: 100.h,
-                                                        width: 150.w,
-                                                        decoration: BoxDecoration(
-                                                            color: ConstColor
-                                                                .color1E3F84,
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        10.r)),
-                                                            boxShadow: const [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                blurRadius: 5.0,
-                                                              ),
-                                                            ]),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  controller
-                                                                      .popupContoller[
-                                                                          index]
-                                                                      .hideMenu();
-                                                                  staffId = controller
-                                                                      .staffList[
-                                                                          index]
-                                                                      .id
-                                                                      .toString();
-                                                                  Get.to(
-                                                                      const AddstaffView(),
-                                                                      arguments:
-                                                                          controller.staffList[index]);
-                                                                },
-                                                                child:
-                                                                    Row(
-                                                                      children: [
-                                                                        Icon(Icons.edit,color: Colors.white,size: 20,),
-                                                                        SizedBox(width: 10.w,),
-                                                                        CommonText(
-                                                                  text:
-                                                                          "Edit",
-                                                                  fontColor:
-                                                                          Colors
-                                                                              .white,
-                                                                ),
-                                                                      ],
-                                                                    ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 5.h,
-                                                              ),
-                                                              GestureDetector(
-                                                                  onTap: () {
-                                                                    controller
-                                                                        .popupContoller[
-                                                                            index]
-                                                                        .hideMenu();
-                                                                    Get.to(
-                                                                        const DetailsView(),
-                                                                        arguments:
-                                                                            controller.staffList[index]);
-                                                                    // Get.to(
-                                                                    //     const AddcustomerView(),
-                                                                    //     arguments:
-                                                                    //         controller.customerList[index]);
-                                                                  },
-                                                                  child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Icon(Icons.remove_red_eye,color: Colors.white,size: 20),
-                                                                          SizedBox(width: 10.w,),
-                                                                          CommonText(
-                                                                    text:
-                                                                            "View",
-                                                                    fontColor:
-                                                                            Colors
-                                                                                .white,
-                                                                  ),
-                                                                        ],
-                                                                      )),
-                                                              SizedBox(
-                                                                height: 5.h,
-                                                              ),
-                                                              GestureDetector(
-                                                                  onTap: () {
-                                                                    controller
-                                                                        .popupContoller[
-                                                                            index]
-                                                                        .hideMenu();
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        barrierDismissible:
-                                                                            false,
-                                                                        barrierColor: ConstColor.textColor.withOpacity(
-                                                                            0.2),
-                                                                        builder:
-                                                                            (context) {
-                                                                          return CommonDialogHeader(
-                                                                            title: "Confirmation",
-                                                                            bgColor: Colors.white,
-                                                                            child: Padding(
-                                                                              padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
-                                                                              child: Column(
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                children: [
-                                                                                  SizedBox(height: getSize(value: 63).h),
-                                                                                  CommonText(
-                                                                                    text: 'Are you sure you want to delete this customer?',
-                                                                                    fontSize: 14.sp,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    textAlign: TextAlign.center,
-                                                                                  ),
-                                                                                  Padding(
-                                                                                    padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
-                                                                                    child: Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                      children: [
-                                                                                        SizedBox(
-                                                                                          width: getSize(value: 354).w,
-                                                                                          height: getSize(value: 88).h,
-                                                                                          child: CommonElevatedButton(
-                                                                                            text: "Yes".toUpperCase(),
-                                                                                            onPressed: () {
-                                                                                              Get.back();
-                                                                                              // controller.customerDelete(id: controller.customerList[index].id.toString());
-                                                                                            },
-                                                                                            textColor: ConstColor.newBackgroundColor,
-                                                                                            bgColor: ConstColor.newBackgroundColor,
-                                                                                            fontWeight: FontWeight.w700,
-                                                                                            fontSize: 14.sp,
-                                                                                          ),
-                                                                                        ),
-                                                                                        SizedBox(
-                                                                                          width: getSize(value: 354).w,
-                                                                                          height: getSize(value: 88).h,
-                                                                                          child: CommonTextButton(
-                                                                                            text: "No".toUpperCase(),
-                                                                                            onPressed: () {
-                                                                                              Get.back();
-                                                                                              Get.back();
-                                                                                            },
-                                                                                            textColor: ConstColor.textColor,
-                                                                                            fontWeight: FontWeight.w700,
-                                                                                            fontSize: 16.sp,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        });
-                                                                  },
-                                                                  child:
-                                                                      Row(
-                                                                        children: [
-                                                                          Icon(Icons.delete,color: Colors.white,size: 20,),
-                                                                          SizedBox(width: 10.w,),
-                                                                          CommonText(
-                                                                    text:
-                                                                            "Delete",
-                                                                    fontColor:
-                                                                            Colors
-                                                                                .white,
-                                                                  ),
-                                                                        ],
-                                                                      )),
-
-                                                              // CommonText(text: "Edit"),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      child: GestureDetector(
-                                                          onTap: () {
-                                                            controller
-                                                                .popupContoller[
-                                                                    index]
-                                                                .showMenu();
-                                                          },
-                                                          child: const Icon(
-                                                              Icons.more_vert)),
-                                                    ),
-                                                  ],
-                                                ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
+                                                      top: 10.w,
                                                       left: 10.w,
                                                       right: 10.w,
                                                       bottom: 10.h),
@@ -718,22 +583,76 @@ class StaaflistView extends GetView<StaaflistController> {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          Container(
-                                                            height: 50.h,
-                                                            width: 50.h,
-                                                            decoration: BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(10
-                                                                            .r),
-                                                                color: ConstColor
-                                                                    .profileBackgroundColor),
-                                                            child: Center(
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                      "assets/assets_svg/person.svg"),
+                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                                "https://www.scfinvestmentgroup.com/public/upload/user_image/${controller.staffList[index].profileImage}",
+                                                            height: 60.h,
+                                                            width: 60.h,
+                                                            fit: BoxFit
+                                                                .fitHeight,
+                                                            imageBuilder: (context,
+                                                                    imageProvider) =>
+                                                                Container(
+                                                              width: 60.h,
+                                                              height: 60.h,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                image: DecorationImage(
+                                                                    image:
+                                                                        imageProvider,
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                              ),
+                                                            ),
+
+                                                            // placeholder: (context,
+                                                            //         url) =>
+                                                            //     const CircularProgressIndicator(),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Container(
+                                                              height: 50.h,
+                                                              width: 50.h,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(10
+                                                                              .r),
+                                                                  color: ConstColor
+                                                                      .profileBackgroundColor),
+                                                              child: Center(
+                                                                child: SvgPicture
+                                                                    .asset(
+                                                                        "assets/assets_svg/person.svg"),
+                                                              ),
                                                             ),
                                                           ),
+                                                          // Container(
+                                                          //   height: 50.h,
+                                                          //   width: 50.h,
+                                                          //   decoration: BoxDecoration(
+                                                          //       borderRadius:
+                                                          //           BorderRadius
+                                                          //               .circular(10
+                                                          //                   .r),
+                                                          //       color: ConstColor
+                                                          //           .profileBackgroundColor),
+                                                          //   child: Center(
+                                                          //     child: controller
+                                                          //                 .staffList[
+                                                          //                     index]
+                                                          //                 .profileImage !=
+                                                          //             null
+                                                          //         ? Image.network(
+                                                          //             " ${controller.staffList[index].profileImage!}")
+                                                          //         : SvgPictures
+                                                          //             .asset(
+                                                          //                 "assets/assets_svg/person.svg"),
+                                                          //   ),
+                                                          // ),
                                                           SizedBox(
                                                             width: 10.w,
                                                           ),
@@ -742,13 +661,17 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              CommonText(
-                                                                text:
-                                                                    "${controller.staffList[index].firstName} ${controller.staffList[index].lastName}",
-                                                                maxLine: 1,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
+                                                              Container(
+                                                                width: 100.w,
+                                                                child:
+                                                                    CommonText(
+                                                                  text:
+                                                                      "${controller.staffList[index].firstName.toString().capitalize} ${controller.staffList[index].lastName.toString().capitalize}",
+                                                                  maxLine: 1,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
                                                               ),
                                                               SizedBox(
                                                                 width: 5.w,
@@ -781,27 +704,25 @@ class StaaflistView extends GetView<StaaflistController> {
                                                               Row(
                                                                 children: [
                                                                   Icon(
-                                                                    Icons
-                                                                        .phone,
-                                                                    size:
-                                                                    14.h,
+                                                                    Icons.phone,
+                                                                    size: 14.h,
                                                                     color: ConstColor
                                                                         .greyTextColor,
                                                                   ),
                                                                   SizedBox(
-                                                                    width:
-                                                                    5.w,
+                                                                    width: 5.w,
                                                                   ),
                                                                   CommonText(
                                                                       text: controller
                                                                           .staffList![
-                                                                      index]
+                                                                              index]
                                                                           .mobileNo
                                                                           .toString(),
-                                                                      fontSize: 12
-                                                                          .h,
+                                                                      fontSize:
+                                                                          12.h,
                                                                       fontColor:
-                                                                      ConstColor.greyTextColor),
+                                                                          ConstColor
+                                                                              .greyTextColor),
                                                                 ],
                                                               ),
                                                             ],
@@ -838,7 +759,232 @@ class StaaflistView extends GetView<StaaflistController> {
                                                                   'true';
                                                             }
                                                             controller.update();
-                                                          })
+                                                          }),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          CustomPopupMenu(
+                                                            arrowSize: 0,
+                                                            verticalMargin: 0,
+                                                            horizontalMargin:
+                                                                10,
+                                                            pressType: PressType
+                                                                .singleClick,
+                                                            controller: controller
+                                                                    .popupContoller[
+                                                                index],
+                                                            menuBuilder: () =>
+                                                                Container(
+                                                              height: 100.h,
+                                                              width: 150.w,
+                                                              decoration: BoxDecoration(
+                                                                  color: ConstColor
+                                                                      .color1E3F84,
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10.r)),
+                                                                  boxShadow: const [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      blurRadius:
+                                                                          5.0,
+                                                                    ),
+                                                                  ]),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        controller
+                                                                            .popupContoller[index]
+                                                                            .hideMenu();
+                                                                        staffId = controller
+                                                                            .staffList[index]
+                                                                            .id
+                                                                            .toString();
+                                                                        Get.to(
+                                                                            const AddstaffView(),
+                                                                            arguments:
+                                                                                controller.staffList[index]);
+                                                                      },
+                                                                      child:
+                                                                          Row(
+                                                                        children: [
+                                                                          Icon(
+                                                                            Icons.edit,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            size:
+                                                                                20,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                10.w,
+                                                                          ),
+                                                                          CommonText(
+                                                                            text:
+                                                                                "Edit",
+                                                                            fontColor:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.h,
+                                                                    ),
+                                                                    GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          controller
+                                                                              .popupContoller[index]
+                                                                              .hideMenu();
+                                                                          Get.to(
+                                                                              const DetailsView(),
+                                                                              arguments: controller.staffList[index]);
+                                                                          // Get.to(
+                                                                          //     const AddcustomerView(),
+                                                                          //     arguments:
+                                                                          //         controller.customerList[index]);
+                                                                        },
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Icon(Icons.remove_red_eye,
+                                                                                color: Colors.white,
+                                                                                size: 20),
+                                                                            SizedBox(
+                                                                              width: 10.w,
+                                                                            ),
+                                                                            CommonText(
+                                                                              text: "View",
+                                                                              fontColor: Colors.white,
+                                                                            ),
+                                                                          ],
+                                                                        )),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.h,
+                                                                    ),
+                                                                    GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          controller
+                                                                              .popupContoller[index]
+                                                                              .hideMenu();
+                                                                          showDialog(
+                                                                              context: context,
+                                                                              barrierDismissible: false,
+                                                                              barrierColor: ConstColor.textColor.withOpacity(0.2),
+                                                                              builder: (context) {
+                                                                                return CommonDialogHeader(
+                                                                                  title: "Confirmation",
+                                                                                  bgColor: Colors.white,
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsets.symmetric(horizontal: getSize(value: 50).w),
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        SizedBox(height: getSize(value: 63).h),
+                                                                                        CommonText(
+                                                                                          text: 'Are you sure you want to delete this staff?',
+                                                                                          fontSize: 14.sp,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          textAlign: TextAlign.center,
+                                                                                        ),
+                                                                                        Padding(
+                                                                                          padding: EdgeInsets.only(top: getSize(value: 66).h, bottom: 30.h),
+                                                                                          child: Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                            children: [
+                                                                                              SizedBox(
+                                                                                                width: getSize(value: 354).w,
+                                                                                                height: getSize(value: 88).h,
+                                                                                                child: CommonElevatedButton(
+                                                                                                  text: "Yes".toUpperCase(),
+                                                                                                  onPressed: () {
+                                                                                                    Get.back();
+                                                                                                    controller.staffDelete(id: controller.staffList[index].id.toString());
+                                                                                                    // controller.customerDelete(id: controller.customerList[index].id.toString());
+                                                                                                  },
+                                                                                                  textColor: ConstColor.newBackgroundColor,
+                                                                                                  bgColor: ConstColor.newBackgroundColor,
+                                                                                                  fontWeight: FontWeight.w700,
+                                                                                                  fontSize: 14.sp,
+                                                                                                ),
+                                                                                              ),
+                                                                                              SizedBox(
+                                                                                                width: getSize(value: 354).w,
+                                                                                                height: getSize(value: 88).h,
+                                                                                                child: CommonTextButton(
+                                                                                                  text: "No".toUpperCase(),
+                                                                                                  onPressed: () {
+                                                                                                    Get.back();
+                                                                                                  },
+                                                                                                  textColor: ConstColor.textColor,
+                                                                                                  fontWeight: FontWeight.w700,
+                                                                                                  fontSize: 16.sp,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              });
+                                                                        },
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Icon(
+                                                                              Icons.delete,
+                                                                              color: Colors.white,
+                                                                              size: 20,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 10.w,
+                                                                            ),
+                                                                            CommonText(
+                                                                              text: "Delete",
+                                                                              fontColor: Colors.white,
+                                                                            ),
+                                                                          ],
+                                                                        )),
+
+                                                                    // CommonText(text: "Edit"),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            child:
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      controller
+                                                                          .popupContoller[
+                                                                              index]
+                                                                          .showMenu();
+                                                                    },
+                                                                    child: const Icon(
+                                                                        Icons
+                                                                            .more_vert)),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
                                                 ),

@@ -39,7 +39,7 @@ class CommonDialogHeader extends StatelessWidget {
             Container(
               height: getSize(value: 127).h,
               decoration: BoxDecoration(
-                color: headerColor ?? ConstColor.textColor,
+                color: headerColor ?? ConstColor.buttonColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(getSize(value: 70).r),
                     topRight: Radius.circular(getSize(value: 70).r)),

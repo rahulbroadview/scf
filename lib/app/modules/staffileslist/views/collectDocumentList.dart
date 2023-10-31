@@ -37,6 +37,7 @@ class _CollectDocumentStaffViewState extends State<CollectDocumentStaffView> {
   ];
   List<FileDetailsList> fileDetailsList = [];
   List collectFileList = [];
+  List notCollectFileList = [];
   final staffKey = GlobalKey<FormState>();
   List<AllDocumentList> documentList = [];
   bool isload = false;
@@ -81,6 +82,8 @@ class _CollectDocumentStaffViewState extends State<CollectDocumentStaffView> {
       "login_id": id,
       "loan_file_id": widget.fileId,
     };
+    print(jsonEncode(data));
+    print(UrlUtils.getAllDocumnets);
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.getAllDocumnets, data);
     if (finalData != null) {
@@ -91,6 +94,8 @@ class _CollectDocumentStaffViewState extends State<CollectDocumentStaffView> {
       for (int i = 0; i < documentList.length; i++) {
         if (documentList[i].isCollect == 'Yes') {
           collectFileList.add(documentList[i].id);
+        } else {
+          notCollectFileList.add(documentList[i].id);
         }
       }
       isload = false;

@@ -28,10 +28,9 @@ class FilelistController extends GetxController {
   }
 
   fileListApi() async {
-    print("###########");
-    if (customerName != null) {
-      print("-------${customerName}");
-    }
+    if (customerName != null) {}
+    fileList = [];
+    popupContoller = [];
     isLoder = true;
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
@@ -42,10 +41,8 @@ class FilelistController extends GetxController {
       "page_no": "1",
       "customer_id": customerId
     };
-    print(jsonEncode(data));
     var finalData = await APIServices.postWithDioForlogin(
         UrlUtils.customerFileListUrl, data);
-    print(finalData);
     if (finalData != null) {
       FileListModel userData = FileListModel.fromJson(finalData);
       if (userData.response != null) {
@@ -93,6 +90,30 @@ class FilelistController extends GetxController {
       //   }
       // }
       // isLoder = false;
+    }
+    update();
+  }
+
+  deleteFile({String? fileName, String? fileId}) async {
+    // isLoder = true;
+    final prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    String id = prefs.getString('id') ?? '';
+    Map data = {
+      "id": fileId,
+      "token": token,
+      "login_id": id,
+      "file_no": fileName,
+    };
+    print(jsonEncode(data));
+    print(UrlUtils.deleteFileToStaff);
+    var finalData =
+        await APIServices.postWithDioForlogin(UrlUtils.deleteFileToStaff, data);
+    if (finalData != null) {
+      Get.rawSnackbar(
+          message: finalData['response'],
+          backgroundColor: ConstColor.color009846);
+      await fileListApi();
     }
     update();
   }

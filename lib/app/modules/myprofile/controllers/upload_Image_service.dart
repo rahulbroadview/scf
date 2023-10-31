@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/url_utils.dart';
 import '../../../data/services/api_services.dart';
 
-class ImageUpload {
+class ProfileImageUpload {
   static imageUploadService(
       {File? profileImage,
       File? idProof,
@@ -20,11 +20,13 @@ class ImageUpload {
       String? birthDate}) async {
     String? fileName;
     final prefs = await SharedPreferences.getInstance();
+
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
     if (profileImage != null) {
       fileName = profileImage.path.split('/').last;
     }
+    print(birthDate);
     var data = FormData.fromMap({
       if (profileImage != null)
         'profile_image': await MultipartFile.fromFile(profileImage.path,
@@ -32,7 +34,8 @@ class ImageUpload {
       if (idProof != null)
         'id_proof':
             await MultipartFile.fromFile('/path/to/file', filename: 'file'),
-      'user_type': 'customer',
+      "id": id,
+      'user_type': 'staff',
       'first_name': firstName,
       'last_name': lastName,
       'mobile_no': mobile,
@@ -49,7 +52,7 @@ class ImageUpload {
     });
 
     var finalData =
-        await APIServices.postWithDioForlogin(UrlUtils.storeUser, data);
+        await APIServices.postWithDioForlogin(UrlUtils.updateUser, data);
     if (finalData != null) {
       print("=====$finalData");
       return finalData;

@@ -73,6 +73,55 @@ class AddSettingView extends GetView<AddSettingController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.getExcel();
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 50.h,
+                                      width: 50.h,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.r),
+                                          color: ConstColor
+                                              .profileBackgroundColor),
+                                      child: Center(
+                                        child: Image.asset(
+                                            "assets/assets_svg/file.png"),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20.w,
+                                    ),
+                                    CommonText(text: "Export"),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.keyboard_arrow_right)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Divider(
+                          thickness: 1.h,
+                          color: Colors.grey.withOpacity(0.4),
+                          height: 1.h,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(const AddLoanCategoryView());
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Row(
                                 children: [
                                   Container(

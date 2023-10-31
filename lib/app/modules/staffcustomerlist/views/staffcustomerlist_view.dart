@@ -122,8 +122,10 @@ class StaffCustomerListView extends GetView<StaffCustomerListController> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
+                                                      const SizedBox(),
                                                       CommonText(
-                                                          text: 'Sort By Date'),
+                                                          text:
+                                                              'Search By Filter'),
                                                       IconButton(
                                                           onPressed: () {
                                                             Get.back();
@@ -216,7 +218,7 @@ class StaffCustomerListView extends GetView<StaffCustomerListController> {
                                                         ),
                                                         Center(
                                                           child: SizedBox(
-                                                            width: 200,
+                                                            width: Get.width,
                                                             height: 50.h,
                                                             child:
                                                                 CommonElevatedButton(
@@ -229,7 +231,7 @@ class StaffCustomerListView extends GetView<StaffCustomerListController> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
-                                                              text: 'Save',
+                                                              text: 'Apply',
                                                               onPressed: () {
                                                                 if (controller
                                                                     .popupFormKey
@@ -559,35 +561,35 @@ class StaffCustomerListView extends GetView<StaffCustomerListController> {
                                                           )
                                                         ],
                                                       ),
-                                                      Switch(
-                                                          activeColor:
-                                                              const Color(
-                                                                  0xff0F9D3F),
-                                                          value: controller
-                                                                      .staffFilterList![
-                                                                          index]
-                                                                      .status ==
-                                                                  'true'
-                                                              ? true
-                                                              : false,
-                                                          onChanged: (val) {
-                                                            if (controller
-                                                                    .staffFilterList![
-                                                                        index]
-                                                                    .status ==
-                                                                'true') {
-                                                              controller
-                                                                  .staffFilterList![
-                                                                      index]
-                                                                  .status = 'false';
-                                                            } else {
-                                                              controller
-                                                                  .staffFilterList![
-                                                                      index]
-                                                                  .status = 'true';
-                                                            }
-                                                            controller.update();
-                                                          })
+                                                      // Switch(
+                                                      //     activeColor:
+                                                      //         const Color(
+                                                      //             0xff0F9D3F),
+                                                      //     value: controller
+                                                      //                 .staffFilterList![
+                                                      //                     index]
+                                                      //                 .status ==
+                                                      //             'true'
+                                                      //         ? true
+                                                      //         : false,
+                                                      //     onChanged: (val) {
+                                                      //       if (controller
+                                                      //               .staffFilterList![
+                                                      //                   index]
+                                                      //               .status ==
+                                                      //           'true') {
+                                                      //         controller
+                                                      //             .staffFilterList![
+                                                      //                 index]
+                                                      //             .status = 'false';
+                                                      //       } else {
+                                                      //         controller
+                                                      //             .staffFilterList![
+                                                      //                 index]
+                                                      //             .status = 'true';
+                                                      //       }
+                                                      //       controller.update();
+                                                      //     })
                                                     ],
                                                   ),
                                                 ),
@@ -864,35 +866,35 @@ class StaffCustomerListView extends GetView<StaffCustomerListController> {
                                                           )
                                                         ],
                                                       ),
-                                                      Switch(
-                                                          activeColor:
-                                                              const Color(
-                                                                  0xff0F9D3F),
-                                                          value: controller
-                                                                      .customerList[
-                                                                          index]
-                                                                      .status ==
-                                                                  'true'
-                                                              ? true
-                                                              : false,
-                                                          onChanged: (val) {
-                                                            if (controller
-                                                                    .customerList[
-                                                                        index]
-                                                                    .status ==
-                                                                'true') {
-                                                              controller
-                                                                  .customerList[
-                                                                      index]
-                                                                  .status = 'false';
-                                                            } else {
-                                                              controller
-                                                                  .customerList[
-                                                                      index]
-                                                                  .status = 'true';
-                                                            }
-                                                            controller.update();
-                                                          })
+                                                      // Switch(
+                                                      //     activeColor:
+                                                      //         const Color(
+                                                      //             0xff0F9D3F),
+                                                      //     value: controller
+                                                      //                 .customerList[
+                                                      //                     index]
+                                                      //                 .status ==
+                                                      //             'true'
+                                                      //         ? true
+                                                      //         : false,
+                                                      //     onChanged: (val) {
+                                                      //       if (controller
+                                                      //               .customerList[
+                                                      //                   index]
+                                                      //               .status ==
+                                                      //           'true') {
+                                                      //         controller
+                                                      //             .customerList[
+                                                      //                 index]
+                                                      //             .status = 'false';
+                                                      //       } else {
+                                                      //         controller
+                                                      //             .customerList[
+                                                      //                 index]
+                                                      //             .status = 'true';
+                                                      //       }
+                                                      //       controller.update();
+                                                      //     })
                                                     ],
                                                   ),
                                                 ),
