@@ -13,7 +13,7 @@ class OtpView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
-    return GetBuilder<LoginController>(builder: (context) {
+    return GetBuilder<LoginController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
           body: SizedBox(
@@ -108,6 +108,7 @@ class OtpView extends GetView<LoginController> {
                                   child: CommonElevatedButton(
                                       text: 'Verify Otp',
                                       onPressed: () {
+                                        FocusScope.of(context).unfocus();
                                         if (controller.verificationCode.length <
                                             6) {
                                           Get.rawSnackbar(

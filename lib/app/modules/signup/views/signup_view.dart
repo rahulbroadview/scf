@@ -13,7 +13,7 @@ class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     Get.put(SignupController());
-    return GetBuilder<SignupController>(builder: (context) {
+    return GetBuilder<SignupController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
           body: Form(
@@ -176,6 +176,7 @@ class SignupView extends GetView<SignupController> {
                                     child: CommonElevatedButton(
                                         text: 'Sign in',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller
                                               .logformKey.currentState!
                                               .validate()) {

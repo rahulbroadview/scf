@@ -331,6 +331,8 @@ class AddstaffView extends GetView<AddstaffController> {
                                             child: CommonElevatedButton(
                                                 text: 'Update Staff',
                                                 onPressed: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
                                                   if (controller
                                                       .staffKey.currentState!
                                                       .validate()) {
@@ -345,6 +347,8 @@ class AddstaffView extends GetView<AddstaffController> {
                                             child: CommonElevatedButton(
                                                 text: 'Add Staff',
                                                 onPressed: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
                                                   if (controller
                                                       .staffKey.currentState!
                                                       .validate()) {

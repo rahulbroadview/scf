@@ -326,6 +326,7 @@ class AddLoanFilesView extends GetView<AddLoanFilesController> {
                                     child: CommonElevatedButton(
                                         text: 'Add Loan Documents',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller.staffKey.currentState!
                                               .validate()) {
                                             controller.updateDocumentApi();

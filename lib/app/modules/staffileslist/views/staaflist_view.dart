@@ -402,6 +402,9 @@ class StaffFileListView extends GetView<StaffFileListController> {
                                                                   text: 'Apply',
                                                                   onPressed:
                                                                       () {
+                                                                    FocusScope.of(
+                                                                            context)
+                                                                        .unfocus();
                                                                     // if (controller
                                                                     //     .popupFormKey
                                                                     //     .currentState!
@@ -550,7 +553,7 @@ class StaffFileListView extends GetView<StaffFileListController> {
                                                                           () =>
                                                                               Container(
                                                                         height:
-                                                                            125.h,
+                                                                            95.h,
                                                                         width:
                                                                             200.w,
                                                                         decoration: BoxDecoration(
@@ -602,36 +605,37 @@ class StaffFileListView extends GetView<StaffFileListController> {
                                                                                   ),
                                                                                 ),
                                                                                 SizedBox(height: 15.h),
-                                                                                GestureDetector(
-                                                                                  onTap: () {
-                                                                                    controller.popupContoller[index].hideMenu();
-                                                                                    Get.to(UpdateFileStatusView(
-                                                                                      fileId: controller.fileFilterList![index].id.toString(),
-                                                                                      fileNumber: controller.fileFilterList![index].fileNo.toString(),
-                                                                                      fileStatus: controller.fileFilterList![index].fileStatus.toString(),
-                                                                                    ))!
-                                                                                        .then((value) {
-                                                                                      controller.fileListApi();
-                                                                                    });
-                                                                                  },
-                                                                                  child: Row(
-                                                                                    children: [
-                                                                                      const Icon(
-                                                                                        Icons.file_copy,
-                                                                                        color: Colors.black,
-                                                                                        size: 20,
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 10.w,
-                                                                                      ),
-                                                                                      CommonText(
-                                                                                        text: "Update File Status",
-                                                                                        fontColor: Colors.black,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                                SizedBox(height: 15.h),
+                                                                                // GestureDetector(
+                                                                                //   onTap: () {
+                                                                                //     controller.popupContoller[index].hideMenu();
+                                                                                //     Get.to(UpdateFileStatusView(
+                                                                                //       fileId: controller.fileFilterList![index].id.toString(),
+                                                                                //       fileNumber: controller.fileFilterList![index].fileNo.toString(),
+                                                                                //       fileStatus: controller.fileFilterList![index].fileStatus.toString(),
+                                                                                //     ))!
+                                                                                //         .then((value) {
+                                                                                //       controller.fileListApi();
+                                                                                //     });
+                                                                                //   },
+                                                                                //   child: Row(
+                                                                                //     children: [
+                                                                                //       const Icon(
+                                                                                //         Icons.file_copy,
+                                                                                //         color: Colors.black,
+                                                                                //         size: 20,
+                                                                                //       ),
+                                                                                //       SizedBox(
+                                                                                //         width: 10.w,
+                                                                                //       ),
+                                                                                //       CommonText(
+                                                                                //         text: "Update File Status",
+                                                                                //         fontColor: Colors.black,
+                                                                                //       ),
+                                                                                //     ],
+                                                                                //   ),
+                                                                                // ),
+                                                                                // SizedBox(height: 15.h),
+
                                                                                 GestureDetector(
                                                                                     onTap: () {
                                                                                       controller.popupContoller[index].hideMenu();
@@ -931,7 +935,7 @@ class StaffFileListView extends GetView<StaffFileListController> {
                                                                           () =>
                                                                               Container(
                                                                         height:
-                                                                            115.h,
+                                                                            95.h,
                                                                         width:
                                                                             200.w,
                                                                         decoration: BoxDecoration(
@@ -983,36 +987,36 @@ class StaffFileListView extends GetView<StaffFileListController> {
                                                                                   ),
                                                                                 ),
                                                                                 SizedBox(height: 15.h),
-                                                                                GestureDetector(
-                                                                                  onTap: () {
-                                                                                    controller.popupContoller[index].hideMenu();
-                                                                                    Get.to(UpdateFileStatusView(
-                                                                                      fileId: controller.fileList[index].id.toString(),
-                                                                                      fileNumber: controller.fileList[index].fileNo.toString(),
-                                                                                      fileStatus: controller.fileList[index].fileStatus.toString(),
-                                                                                    ))!
-                                                                                        .then((value) {
-                                                                                      controller.fileListApi();
-                                                                                    });
-                                                                                  },
-                                                                                  child: Row(
-                                                                                    children: [
-                                                                                      const Icon(
-                                                                                        Icons.file_copy,
-                                                                                        color: Colors.black,
-                                                                                        size: 20,
-                                                                                      ),
-                                                                                      SizedBox(
-                                                                                        width: 10.w,
-                                                                                      ),
-                                                                                      CommonText(
-                                                                                        text: "Update File Status",
-                                                                                        fontColor: Colors.black,
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                                SizedBox(height: 15.h),
+                                                                                // GestureDetector(
+                                                                                //   onTap: () {
+                                                                                //     controller.popupContoller[index].hideMenu();
+                                                                                //     Get.to(UpdateFileStatusView(
+                                                                                //       fileId: controller.fileList[index].id.toString(),
+                                                                                //       fileNumber: controller.fileList[index].fileNo.toString(),
+                                                                                //       fileStatus: controller.fileList[index].fileStatus.toString(),
+                                                                                //     ))!
+                                                                                //         .then((value) {
+                                                                                //       controller.fileListApi();
+                                                                                //     });
+                                                                                //   },
+                                                                                //   child: Row(
+                                                                                //     children: [
+                                                                                //       const Icon(
+                                                                                //         Icons.file_copy,
+                                                                                //         color: Colors.black,
+                                                                                //         size: 20,
+                                                                                //       ),
+                                                                                //       SizedBox(
+                                                                                //         width: 10.w,
+                                                                                //       ),
+                                                                                //       CommonText(
+                                                                                //         text: "Update File Status",
+                                                                                //         fontColor: Colors.black,
+                                                                                //       ),
+                                                                                //     ],
+                                                                                //   ),
+                                                                                // ),
+                                                                                // SizedBox(height: 15.h),
                                                                                 GestureDetector(
                                                                                     onTap: () {
                                                                                       controller.popupContoller[index].hideMenu();

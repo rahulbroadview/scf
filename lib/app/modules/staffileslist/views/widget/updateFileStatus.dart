@@ -222,6 +222,7 @@ class _UpdateFileStatusViewState extends State<UpdateFileStatusView> {
                                   child: CommonElevatedButton(
                                       text: 'Update File Status',
                                       onPressed: () {
+                                        FocusScope.of(context).unfocus();
                                         if (staffKey.currentState!.validate()) {
                                           fileDetails();
                                           // controller.addFileListApi();

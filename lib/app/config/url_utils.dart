@@ -35,6 +35,8 @@ class UrlUtils {
   static const String updateFileStatus = "${baseUrl}updateFileStatus";
   static const String getAllDocumnets = "${baseUrl}DocumentList";
   static const String updateDocumentStatus = "${baseUrl}updateDocumentStatus";
+  static const String adminUpdateDocumentStatus =
+      "${baseUrl}updateAdminDocumentStatus";
 
 //-----------------other url ----------------------
 

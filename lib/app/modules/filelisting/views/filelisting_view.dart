@@ -238,7 +238,7 @@ class FileListView extends GetView<FilelistController> {
                                                                                         barrierDismissible: false,
                                                                                         barrierColor: ConstColor.textColor.withOpacity(0.2),
                                                                                         builder: (context) {
-                                                                                          return GetBuilder<FilelistController>(builder: (context) {
+                                                                                          return GetBuilder<FilelistController>(builder: (controller) {
                                                                                             return CommonDialogHeader(
                                                                                               title: "Assign To Staff",
                                                                                               showCloseIcon: true,
@@ -315,6 +315,7 @@ class FileListView extends GetView<FilelistController> {
                                                                                                             child: CommonElevatedButton(
                                                                                                               text: "Save".toUpperCase(),
                                                                                                               onPressed: () {
+                                                                                                                FocusScope.of(context).unfocus();
                                                                                                                 if (controller.selectedStaffLit == null) {
                                                                                                                   Get.rawSnackbar(message: "Please select staff.", backgroundColor: ConstColor.errorColor);
                                                                                                                 } else {
@@ -424,6 +425,7 @@ class FileListView extends GetView<FilelistController> {
                                                                                                             child: CommonElevatedButton(
                                                                                                               text: "Yes".toUpperCase(),
                                                                                                               onPressed: () {
+                                                                                                                FocusScope.of(context).unfocus();
                                                                                                                 Get.back();
 
                                                                                                                 controller.deleteFile(fileName: controller.fileList[index].fileNo, fileId: controller.fileList[index].id.toString());

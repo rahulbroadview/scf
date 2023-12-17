@@ -248,6 +248,9 @@ class CustomerlistingView extends GetView<CustomerlistingController> {
                                                                       .w600,
                                                               text: 'Apply',
                                                               onPressed: () {
+                                                                FocusScope.of(
+                                                                        context)
+                                                                    .unfocus();
                                                                 if (controller
                                                                     .popupFormKey
                                                                     .currentState!

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pay_day_manager/app/modules/addloancategory/views/addloancategory_view.dart';
 import 'package:pay_day_manager/app/modules/addloanfiles/views/addloanfiles_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common_widgets/common_elevated_button.dart';
 import '../../../common_widgets/common_text.dart';
@@ -114,7 +115,6 @@ class AddSettingView extends GetView<AddSettingController> {
                         SizedBox(
                           height: 10.h,
                         ),
-
                         GestureDetector(
                           onTap: () {
                             Get.to(const AddLoanCategoryView());
@@ -158,7 +158,6 @@ class AddSettingView extends GetView<AddSettingController> {
                         SizedBox(
                           height: 10.h,
                         ),
-
                         GestureDetector(
                           onTap: () {
                             Get.to(const AddLoanFilesView());
@@ -199,94 +198,52 @@ class AddSettingView extends GetView<AddSettingController> {
                           color: Colors.grey.withOpacity(0.4),
                           height: 1.h,
                         ),
-                        // controller.profileDetails.isEmpty
-                        //     ? const SizedBox()
-                        //     : ListView.builder(
-                        //         physics: const NeverScrollableScrollPhysics(),
-                        //         shrinkWrap: true,
-                        //         itemCount: controller.profileDetails.length,
-                        //         itemBuilder: (context, index) {
-                        //           return Padding(
-                        //             padding: EdgeInsets.only(bottom: 10.h),
-                        //             child: Container(
-                        //               decoration: BoxDecoration(
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(20.r),
-                        //                   color: ConstColor.textColor),
-                        //               child: Padding(
-                        //                 padding: EdgeInsets.all(20.r),
-                        //                 child: Column(
-                        //                   children: [
-                        //                     Center(
-                        //                       child: CircleAvatar(
-                        //                         radius: 25.r,
-                        //                         backgroundColor: Colors.white,
-                        //                         child: Image.asset(
-                        //                           'assets/assets_svg/profile.png',
-                        //                           height: 50.h,
-                        //                           width: 50.h,
-                        //                         ),
-                        //                       ),
-                        //                     ),
-                        //                     SizedBox(
-                        //                       height: 10.h,
-                        //                     ),
-                        //                     Center(
-                        //                       child: CommonText(
-                        //                         text:
-                        //                             '${controller.profileDetails[index].firstName} ${controller.profileDetails[index].lastName}',
-                        //                         fontSize: 16.sp,
-                        //                         fontColor: Colors.white,
-                        //                         fontWeight: FontWeight.w500,
-                        //                       ),
-                        //                     ),
-                        //                     SizedBox(
-                        //                       height: 5.h,
-                        //                     ),
-                        //                     Center(
-                        //                       child: CommonText(
-                        //                         text: controller
-                        //                                 .profileDetails[index]
-                        //                                 .userType ??
-                        //                             '',
-                        //                         fontSize: 12.sp,
-                        //                         fontColor: Colors.white,
-                        //                         fontWeight: FontWeight.w400,
-                        //                       ),
-                        //                     ),
-                        //                     SizedBox(
-                        //                       height: 5.h,
-                        //                     ),
-                        //                     CommonText(
-                        //                       text:
-                        //                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare pretium placerat ut platea.',
-                        //                       fontSize: 12.sp,
-                        //                       fontColor: Colors.white,
-                        //                       fontWeight: FontWeight.w300,
-                        //                     ),
-                        //                     SizedBox(
-                        //                       height: 15.h,
-                        //                     ),
-                        //                     Row(
-                        //                       mainAxisAlignment:
-                        //                           MainAxisAlignment.end,
-                        //                       children: [
-                        //                         SizedBox(
-                        //                             height: 30.h,
-                        //                             width: 100.h,
-                        //                             child: CommonElevatedButton(
-                        //                                 fontSize: 12.sp,
-                        //                                 text: 'Edit Profile',
-                        //                                 onPressed: () {})),
-                        //                       ],
-                        //                     )
-                        //                   ],
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           );
-                        //         },
-                        //       ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            final Uri url = Uri.parse("https://wa.me/?text=https://www.scfinvestmentgroup.com/apk_versions/uploads/SCF_v1.1.apk");
+                            if (!await launchUrl(url)) {
+                              throw Exception('Could not launch');
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 50.h,
+                                    width: 50.h,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        color:
+                                            ConstColor.profileBackgroundColor),
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/assets_svg/file.png"),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
+                                  CommonText(text: "Share App"),
+                                ],
+                              ),
+                              const Icon(Icons.keyboard_arrow_right)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Divider(
+                          thickness: 1.h,
+                          color: Colors.grey.withOpacity(0.4),
+                          height: 1.h,
+                        ),
                       ],
                     ),
                   ),

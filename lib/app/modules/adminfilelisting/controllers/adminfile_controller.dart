@@ -23,6 +23,7 @@ class AdminFilelistController extends GetxController {
   final fromDateController = TextEditingController();
   final toDateController = TextEditingController();
   final popupFormKey = GlobalKey<FormState>();
+  String lonFileId = "";
   DateTime? selectedDate;
   DateTime? selectedDate1;
   List<String> requireFileList = [
@@ -65,6 +66,9 @@ class AdminFilelistController extends GetxController {
       if (userData.response != null) {
         fileList = userData.response!;
         print("------${fileList.length}");
+      }
+      for (int i = 0; i < fileList.length; i++) {
+        popupContoller.add(CustomPopupMenuController());
       }
       isLoder = false;
     } else {
@@ -158,6 +162,9 @@ class AdminFilelistController extends GetxController {
                 .toLowerCase()
                 .contains(searchText.toLowerCase()))
         .toList();
+    for (int i = 0; i < fileFilterList!.length; i++) {
+      popupContoller.add(CustomPopupMenuController());
+    }
     update();
   }
 

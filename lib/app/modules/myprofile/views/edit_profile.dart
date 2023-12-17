@@ -295,6 +295,7 @@ class EditProfile extends GetView<MyprofileController> {
                                 child: CommonElevatedButton(
                                     text: 'Update Profile',
                                     onPressed: () {
+                                      FocusScope.of(context).unfocus();
                                       if (controller
                                           .addcustomerKey.currentState!
                                           .validate()) {

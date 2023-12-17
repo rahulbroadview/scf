@@ -202,7 +202,7 @@ class ViewUser {
   String? createdAt;
   String? updatedAt;
   String? deviceToken;
-  String? otp;
+  int? otp;
 
   ViewUser(
       {this.id,

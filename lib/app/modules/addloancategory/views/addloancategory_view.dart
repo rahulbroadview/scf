@@ -197,6 +197,7 @@ class AddLoanCategoryView extends GetView<AddLoanCategoryController> {
                                     child: CommonElevatedButton(
                                         text: 'Add Loan Category',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller.staffKey.currentState!
                                               .validate()) {
                                             controller.addFileListApi();

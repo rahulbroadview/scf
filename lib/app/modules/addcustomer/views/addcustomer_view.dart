@@ -288,6 +288,7 @@ class AddcustomerView extends GetView<AddcustomerController> {
                                     ? CommonElevatedButton(
                                         text: 'Update Customer',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller
                                               .addcustomerKey.currentState!
                                               .validate()) {
@@ -297,6 +298,7 @@ class AddcustomerView extends GetView<AddcustomerController> {
                                     : CommonElevatedButton(
                                         text: 'Add Customer',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller
                                               .addcustomerKey.currentState!
                                               .validate()) {

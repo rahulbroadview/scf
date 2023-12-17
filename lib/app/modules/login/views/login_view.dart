@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
-    return GetBuilder<LoginController>(builder: (context) {
+    return GetBuilder<LoginController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
           body: Form(
@@ -179,6 +179,7 @@ class LoginView extends GetView<LoginController> {
                                           if (controller
                                               .logformKey.currentState!
                                               .validate()) {
+                                            FocusScope.of(context).unfocus();
                                             controller.loginApiCall();
                                             // Get.offAll(const DashboardView());
                                           }

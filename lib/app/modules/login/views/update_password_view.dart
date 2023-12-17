@@ -152,6 +152,7 @@ class UpdatePAsswordView extends GetView<LoginController> {
                                     child: CommonElevatedButton(
                                         text: 'Update Password',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           if (controller
                                               .updatePasswordKey.currentState!
                                               .validate()) {

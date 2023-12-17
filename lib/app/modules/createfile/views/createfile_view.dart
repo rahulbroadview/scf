@@ -199,6 +199,8 @@ class CreateFileView extends GetView<CreateFileController> {
                                           child: CommonElevatedButton(
                                               text: 'Update File',
                                               onPressed: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                                 if (controller
                                                     .staffKey.currentState!
                                                     .validate()) {
@@ -214,6 +216,8 @@ class CreateFileView extends GetView<CreateFileController> {
                                           child: CommonElevatedButton(
                                               text: 'Add File',
                                               onPressed: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                                 if (controller
                                                     .staffKey.currentState!
                                                     .validate()) {

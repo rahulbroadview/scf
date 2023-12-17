@@ -17,8 +17,9 @@ import '../../../core/them/const_color.dart';
 class CollectDocumentStaffView extends StatefulWidget {
   String fileId;
   String loanId;
+  String? fromAdmin;
   CollectDocumentStaffView(
-      {super.key, required this.fileId, required this.loanId});
+      {super.key, required this.fileId, required this.loanId, this.fromAdmin});
 
   @override
   State<CollectDocumentStaffView> createState() =>
@@ -48,6 +49,11 @@ class _CollectDocumentStaffViewState extends State<CollectDocumentStaffView> {
   }
 
   updateFileStatus() async {
+    if (widget.fromAdmin != null) {
+      print(UrlUtils.adminUpdateDocumentStatus);
+    } else {
+      print(UrlUtils.updateDocumentStatus);
+    }
     final prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
     String id = prefs.getString('id') ?? '';
@@ -59,7 +65,10 @@ class _CollectDocumentStaffViewState extends State<CollectDocumentStaffView> {
     };
     print(jsonEncode(data));
     var finalData = await APIServices.postWithDioForlogin(
-        UrlUtils.updateDocumentStatus, data);
+        widget.fromAdmin != null
+            ? UrlUtils.adminUpdateDocumentStatus
+            : UrlUtils.updateDocumentStatus,
+        data);
 
     if (finalData != null) {
       print("------$finalData");

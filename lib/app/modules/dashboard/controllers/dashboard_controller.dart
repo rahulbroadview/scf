@@ -27,14 +27,11 @@ class DashboardController extends GetxController {
     versionList();
   }
 
-  launch() {
-    final Uri emailLaunchUri = Uri(
-      scheme: '',
-      path:
-          'https://www.scfinvestmentgroup.com/apk_versions/uploads/SCF_v1.0.apk',
-    );
-
-    canLaunchUrl(Uri.parse('https://www.google.com'));
+  launch({required String apkUrl}) async {
+    final Uri url = Uri.parse(apkUrl);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch');
+    }
   }
 
   // _launchWhatsapp() async {
@@ -55,13 +52,13 @@ class DashboardController extends GetxController {
     Map data = {
       "token": token,
       "login_id": id,
-      "version": "1.0",
+      "version": "1.1",
     };
     var finalData =
         await APIServices.postWithDioForlogin(UrlUtils.checkVersion, data);
     if (finalData != null) {
       print("-----final++++$finalData");
-      if (finalData['force_update'] == 'true') {
+      if (finalData['status'] == 'true') {
         print("=======");
 
         showDialog(
@@ -100,7 +97,7 @@ class DashboardController extends GetxController {
                                 text: "Download".toUpperCase(),
                                 onPressed: () {
                                   Get.back();
-                                  launch();
+                                  launch(apkUrl: finalData['URL']);
                                 },
                                 textColor: ConstColor.newBackgroundColor,
                                 bgColor: ConstColor.newBackgroundColor,

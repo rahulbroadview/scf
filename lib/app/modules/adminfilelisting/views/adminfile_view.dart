@@ -1,7 +1,11 @@
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pay_day_manager/app/modules/staffileslist/views/collectDocumentList.dart';
+import 'package:pay_day_manager/app/modules/staffileslist/views/followup.dart';
+import 'package:pay_day_manager/app/modules/staffileslist/views/widget/updateFileStatus.dart';
 import '../../../common_widgets/common_elevated_button.dart';
 import '../../../common_widgets/common_text.dart';
 import '../../../common_widgets/common_text_formfield.dart';
@@ -410,6 +414,9 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                   text: 'Apply',
                                                                   onPressed:
                                                                       () {
+                                                                    FocusScope.of(
+                                                                            context)
+                                                                        .unfocus();
                                                                     if (controller
                                                                         .popupFormKey
                                                                         .currentState!
@@ -545,6 +552,103 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               overflow: TextOverflow.ellipsis,
                                                                               fontSize: 14.sp,
                                                                               fontColor: Colors.white,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 20.w,
+                                                                            ),
+                                                                            CustomPopupMenu(
+                                                                              arrowSize: 0,
+                                                                              horizontalMargin: 10,
+                                                                              verticalMargin: 0,
+                                                                              pressType: PressType.singleClick,
+                                                                              controller: controller.popupContoller[index],
+                                                                              menuBuilder: () => Container(
+                                                                                height: 90.h,
+                                                                                width: 200.w,
+                                                                                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10.r)), boxShadow: const [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.grey,
+                                                                                    blurRadius: 5.0,
+                                                                                  ),
+                                                                                ]),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(8.0),
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsets.only(left: 5.w),
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        GestureDetector(
+                                                                                          onTap: () {
+                                                                                            controller.popupContoller[index].hideMenu();
+                                                                                            Get.to(
+                                                                                                CollectDocumentStaffView(
+                                                                                                  fileId: controller.fileFilterList![index].id.toString(),
+                                                                                                  loanId: controller.fileFilterList![index].loanCategoryId.toString(),
+                                                                                                  fromAdmin: "fromAdmin",
+                                                                                                ),
+                                                                                                arguments: "fromAdmin");
+                                                                                          },
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              const Icon(
+                                                                                                Icons.file_open,
+                                                                                                color: Colors.black,
+                                                                                                size: 20,
+                                                                                              ),
+                                                                                              SizedBox(
+                                                                                                width: 10.w,
+                                                                                              ),
+                                                                                              CommonText(
+                                                                                                text: "Document Status",
+                                                                                                fontColor: Colors.black,
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        SizedBox(height: 15.h),
+                                                                                        GestureDetector(
+                                                                                          onTap: () {
+                                                                                            controller.popupContoller[index].hideMenu();
+                                                                                            Get.to(UpdateFileStatusView(
+                                                                                              fileId: controller.fileFilterList![index].id.toString(),
+                                                                                              fileNumber: controller.fileFilterList![index].fileNo.toString(),
+                                                                                              fileStatus: controller.fileFilterList![index].fileStatus.toString(),
+                                                                                            ))!
+                                                                                                .then((value) {
+                                                                                              controller.fileListApi();
+                                                                                            });
+                                                                                          },
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              const Icon(
+                                                                                                Icons.file_copy,
+                                                                                                color: Colors.black,
+                                                                                                size: 20,
+                                                                                              ),
+                                                                                              SizedBox(
+                                                                                                width: 10.w,
+                                                                                              ),
+                                                                                              CommonText(
+                                                                                                text: "Update File Status",
+                                                                                                fontColor: Colors.black,
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              child: GestureDetector(
+                                                                                  onTap: () {
+                                                                                    controller.popupContoller[index].showMenu();
+                                                                                  },
+                                                                                  child: const Icon(
+                                                                                    Icons.more_vert,
+                                                                                    color: Colors.white,
+                                                                                  )),
                                                                             ),
                                                                           ],
                                                                         ),
@@ -727,6 +831,104 @@ class AdminFileListView extends GetView<AdminFilelistController> {
                                                                               overflow: TextOverflow.ellipsis,
                                                                               fontSize: 14.sp,
                                                                               fontColor: controller.fileList[index].viewStaff != null ? Colors.white : Colors.black,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 20.w,
+                                                                            ),
+                                                                            CustomPopupMenu(
+                                                                              arrowSize: 0,
+                                                                              horizontalMargin: 10,
+                                                                              verticalMargin: 0,
+                                                                              pressType: PressType.singleClick,
+                                                                              controller: controller.popupContoller[index],
+                                                                              menuBuilder: () => Container(
+                                                                                height: 90.h,
+                                                                                width: 200.w,
+                                                                                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10.r)), boxShadow: const [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.grey,
+                                                                                    blurRadius: 5.0,
+                                                                                  ),
+                                                                                ]),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(8.0),
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsets.only(left: 5.w),
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        GestureDetector(
+                                                                                          onTap: () {
+                                                                                            controller.popupContoller[index].hideMenu();
+                                                                                            Get.to(
+                                                                                                CollectDocumentStaffView(
+                                                                                                  fileId: controller.fileList[index].id.toString(),
+                                                                                                  loanId: controller.fileList[index].loanCategoryId.toString(),
+                                                                                                  fromAdmin: "fromAdmin",
+                                                                                                ),
+                                                                                                arguments: "fromAdmin");
+                                                                                          },
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              const Icon(
+                                                                                                Icons.file_open,
+                                                                                                color: Colors.black,
+                                                                                                size: 20,
+                                                                                              ),
+                                                                                              SizedBox(
+                                                                                                width: 10.w,
+                                                                                              ),
+                                                                                              CommonText(
+                                                                                                text: "Document Status",
+                                                                                                fontColor: Colors.black,
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        SizedBox(height: 15.h),
+                                                                                        GestureDetector(
+                                                                                          onTap: () {
+                                                                                            controller.popupContoller[index].hideMenu();
+                                                                                            Get.to(UpdateFileStatusView(
+                                                                                              fileId: controller.fileList[index].id.toString(),
+                                                                                              fileNumber: controller.fileList[index].fileNo.toString(),
+                                                                                              fileStatus: controller.fileList[index].fileStatus.toString(),
+                                                                                            ))!
+                                                                                                .then((value) {
+                                                                                              controller.fileListApi();
+                                                                                            });
+                                                                                          },
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              const Icon(
+                                                                                                Icons.file_copy,
+                                                                                                color: Colors.black,
+                                                                                                size: 20,
+                                                                                              ),
+                                                                                              SizedBox(
+                                                                                                width: 10.w,
+                                                                                              ),
+                                                                                              CommonText(
+                                                                                                text: "Update File Status",
+                                                                                                fontColor: Colors.black,
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        // SizedBox(height: 15.h),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              child: GestureDetector(
+                                                                                  onTap: () {
+                                                                                    controller.popupContoller[index].showMenu();
+                                                                                  },
+                                                                                  child: const Icon(
+                                                                                    Icons.more_vert,
+                                                                                    color: Colors.white,
+                                                                                  )),
                                                                             ),
                                                                           ],
                                                                         ),

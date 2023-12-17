@@ -12,7 +12,7 @@ class ForgotPasswordView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
-    return GetBuilder<LoginController>(builder: (context) {
+    return GetBuilder<LoginController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(
           body: Form(
@@ -121,6 +121,7 @@ class ForgotPasswordView extends GetView<LoginController> {
                                     child: CommonElevatedButton(
                                         text: 'Forgot Password',
                                         onPressed: () {
+                                          FocusScope.of(context).unfocus();
                                           print("======");
                                           if (controller
                                               .forgotPasswordKey.currentState!

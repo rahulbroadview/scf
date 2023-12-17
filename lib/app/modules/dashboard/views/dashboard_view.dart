@@ -93,6 +93,8 @@ class DashboardView extends GetView<DashboardController> {
                                                         text:
                                                             "Yes".toUpperCase(),
                                                         onPressed: () {
+                                                          FocusScope.of(context)
+                                                              .unfocus();
                                                           Get.back();
                                                           controller
                                                               .logoutFunction();

@@ -185,6 +185,8 @@ class MyprofileView extends GetView<MyprofileController> {
                                                         fontSize: 12.sp,
                                                         text: 'Edit Profile',
                                                         onPressed: () {
+                                                          FocusScope.of(context)
+                                                              .unfocus();
                                                           Get.to(const EditProfile())!
                                                               .then((value) =>
                                                                   controller
